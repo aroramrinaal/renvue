@@ -24,7 +24,7 @@ export default function Home() {
       <div className="relative z-10 px-6 py-8">
         {/* Navbar */}
         <nav className="flex justify-between items-center mb-12 max-w-7xl mx-auto">
-          <div className="font-bold text-3xl text-investa-primary">Investa</div>
+          <div className="font-bold text-3xl text-investa-primary">Renvue</div>
           <div className="flex items-center gap-4">
             {/* Mode Toggle - Elite Design */}
             <div className="relative flex items-center">
@@ -108,7 +108,7 @@ export default function Home() {
           </h1>
           <p className="text-investa-gray text-lg md:text-xl max-w-3xl mx-auto mb-10">
             {mode === "investor"
-              ? "Investa helps you find, evaluate, and connect with high-potential early-stage startups that match your investment criteria."
+              ? "Renvue helps you find, evaluate, and connect with high-potential early-stage startups that match your investment criteria."
               : "Showcase your startup to a curated network of investors looking for the next big opportunity in your industry."}
           </p>
           <div className="flex flex-wrap justify-center gap-4">
