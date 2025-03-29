@@ -91,7 +91,7 @@ export default function Home() {
                 </button>
               </div>
             </div>
-            <Link href="/get-started">
+            <Link href="/get-started" className="relative z-20">
               <button className="h-10 px-8 border border-gray-300 text-black hover:bg-gray-50 transition-all font-medium text-sm flex items-center justify-center">
                 Sign In
               </button>
