@@ -1,0 +1,36 @@
+{
+  "name": "existyet",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "postbuild": "next-sitemap"
+  },
+  "dependencies": {
+    "@netlify/plugin-nextjs": "^5.9.3",
+    "@octokit/rest": "^21.1.0",
+    "@vercel/analytics": "^1.4.1",
+    "axios": "^1.7.9",
+    "cheerio": "^1.0.0",
+    "google-auth-library": "^9.15.0",
+    "google-spreadsheet": "^4.1.1",
+    "next": "15.1.3",
+    "next-sitemap": "^4.2.3",
+    "openai": "^4.77.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-tooltip": "^5.28.0",
+    "styled-components": "^6.1.14"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
