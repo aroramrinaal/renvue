@@ -42,13 +42,13 @@ export const metadata: Metadata = {
     "doesthisexist",
   ],
   title: {
-    default: "Exist Yet?",
-    template: "%s | Exist Yet?",
+    default: "Renvue",
+    template: "%s | Renvue",
   },
-  description: "Came up with something innovative? Find out if similar products already exist! Identify gaps in existing products to refine your proposition.",
+  description: "",
   openGraph: {
     description:
-      "Came up with something innovative? Find out if similar products already exist! Identify gaps in existing products to refine your proposition.",
+      "",
   },
 };
 
