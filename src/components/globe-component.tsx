@@ -28,19 +28,30 @@ export default function GlobeComponent() {
     const globe = globeRef.current
     if (!globe) return
 
+    // Start with no rotation on initial render for hydration consistency
+    globe.style.transform = 'rotateZ(0deg)'
+    
     let rotation = 0
-    const animate = () => {
-      rotation += 0.02
-      if (globe) {
-        globe.style.transform = `rotateZ(${rotation}deg)`
+    let animationId: number
+    
+    // Delay starting the animation to avoid hydration issues
+    const timerId = setTimeout(() => {
+      const animate = () => {
+        rotation += 0.02
+        if (globe) {
+          globe.style.transform = `rotateZ(${rotation}deg)`
+        }
+        animationId = requestAnimationFrame(animate)
       }
-      requestAnimationFrame(animate)
-    }
-
-    const animationId = requestAnimationFrame(animate)
+      
+      animate()
+    }, 100)
 
     return () => {
-      cancelAnimationFrame(animationId)
+      clearTimeout(timerId)
+      if (animationId) {
+        cancelAnimationFrame(animationId)
+      }
     }
   }, [])
 
@@ -110,17 +121,38 @@ export default function GlobeComponent() {
           ))}
 
           {/* Glowing Dots */}
-          {Array.from({ length: 20 }).map((_, i) => (
+          {[
+            { left: "21%", top: "26%", width: "4.5px", height: "3.2px", opacity: 0.43 },
+            { left: "81%", top: "65%", width: "3.2px", height: "6px", opacity: 0.53 },
+            { left: "51%", top: "65%", width: "2.8px", height: "2.5px", opacity: 0.49 },
+            { left: "80%", top: "59%", width: "5.3px", height: "3.8px", opacity: 0.46 },
+            { left: "32%", top: "77%", width: "5.2px", height: "4.9px", opacity: 0.5 },
+            { left: "12%", top: "42%", width: "3.8px", height: "3.5px", opacity: 0.4 },
+            { left: "45%", top: "15%", width: "4.2px", height: "4.5px", opacity: 0.55 },
+            { left: "67%", top: "38%", width: "3.9px", height: "3.6px", opacity: 0.48 },
+            { left: "37%", top: "52%", width: "4.6px", height: "4.1px", opacity: 0.52 },
+            { left: "75%", top: "22%", width: "4.1px", height: "3.7px", opacity: 0.47 },
+            { left: "25%", top: "35%", width: "3.5px", height: "3.9px", opacity: 0.42 },
+            { left: "58%", top: "48%", width: "4.3px", height: "4.8px", opacity: 0.51 },
+            { left: "19%", top: "68%", width: "3.4px", height: "3.3px", opacity: 0.44 },
+            { left: "84%", top: "75%", width: "4.7px", height: "4.3px", opacity: 0.49 },
+            { left: "42%", top: "82%", width: "3.6px", height: "3.8px", opacity: 0.45 },
+            { left: "62%", top: "28%", width: "4.4px", height: "4.2px", opacity: 0.53 },
+            { left: "29%", top: "17%", width: "4.0px", height: "4.0px", opacity: 0.41 },
+            { left: "70%", top: "55%", width: "3.7px", height: "4.6px", opacity: 0.5 },
+            { left: "15%", top: "47%", width: "4.5px", height: "4.4px", opacity: 0.46 },
+            { left: "90%", top: "33%", width: "3.3px", height: "3.1px", opacity: 0.43 }
+          ].map((dot, i) => (
             <div
               key={i}
               className="absolute rounded-full bg-investa-primary"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                width: `${Math.random() * 4 + 2}px`,
-                height: `${Math.random() * 4 + 2}px`,
-                opacity: Math.random() * 0.5 + 0.2,
-                boxShadow: "0 0 8px rgba(241, 53, 5, 0.8)",
+                left: dot.left,
+                top: dot.top,
+                width: dot.width,
+                height: dot.height,
+                opacity: dot.opacity,
+                boxShadow: "0 0 8px rgba(241, 53, 5, 0.8)"
               }}
             ></div>
           ))}
@@ -129,13 +161,18 @@ export default function GlobeComponent() {
           <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 5 }}>
             {companyLogos.map((logo, i) => {
               const nextLogo = companyLogos[(i + 1) % companyLogos.length]
+              const startX = logo.position.x
+              const startY = logo.position.y
+              const endX = nextLogo.position.x
+              const endY = nextLogo.position.y
+              
               return (
                 <line
                   key={`line-${i}`}
-                  x1={`${logo.position.x}%`}
-                  y1={`${logo.position.y}%`}
-                  x2={`${nextLogo.position.x}%`}
-                  y2={`${nextLogo.position.y}%`}
+                  x1={`${startX}%`}
+                  y1={`${startY}%`}
+                  x2={`${endX}%`}
+                  y2={`${endY}%`}
                   stroke="rgba(241, 53, 5, 0.2)"
                   strokeWidth="1"
                   strokeDasharray="5,5"
