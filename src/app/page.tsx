@@ -25,28 +25,58 @@ export default function Home() {
             Investa
           </div>
           <div className="flex items-center gap-4">
-            {/* Mode Toggle - Refined Design */}
-            <div className="bg-gray-100 rounded-full p-1 flex items-center shadow-sm">
-              <button
-                onClick={() => setMode("investor")}
-                className={`py-2 px-5 rounded-full text-sm font-medium transition-all duration-300 ${
-                  mode === "investor"
-                    ? "bg-investa-primary text-white shadow-md transform scale-105"
-                    : "text-investa-gray hover:bg-gray-200"
-                }`}
-              >
-                Investor
-              </button>
-              <button
-                onClick={() => setMode("startup")}
-                className={`py-2 px-5 rounded-full text-sm font-medium transition-all duration-300 ${
-                  mode === "startup"
-                    ? "bg-investa-primary text-white shadow-md transform scale-105"
-                    : "text-investa-gray hover:bg-gray-200"
-                }`}
-              >
-                Startup
-              </button>
+            {/* Mode Toggle - Elite Design */}
+            <div className="relative flex items-center">
+              <div 
+                className="absolute inset-0 bg-gradient-to-r from-investa-primary/20 to-investa-primary/10 rounded-full blur-sm"
+                style={{ 
+                  width: mode === "investor" ? "50%" : "100%", 
+                  left: mode === "investor" ? "0" : "50%", 
+                  transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+                  opacity: "0.8",
+                  transform: `scale(${mode === "investor" ? "1.05" : "1.05"})`,
+                }}
+              ></div>
+              <div className="bg-white/90 backdrop-blur-sm rounded-full p-0.5 flex items-center shadow-lg border border-gray-100 relative overflow-hidden z-10">
+                <div 
+                  className="absolute h-full rounded-full bg-gradient-to-r from-investa-primary to-investa-primary/90 transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+                  style={{ 
+                    width: "50%", 
+                    transform: `translateX(${mode === "investor" ? "0%" : "100%"})`,
+                    boxShadow: "0 0 15px rgba(241, 53, 5, 0.3)" 
+                  }}
+                ></div>
+                <button
+                  onClick={() => setMode("investor")}
+                  className={`relative z-10 flex items-center min-w-[90px] justify-center py-2 px-4 md:px-6 rounded-full text-sm font-medium transition-all duration-300 ${
+                    mode === "investor"
+                      ? "text-white" 
+                      : "text-investa-gray hover:text-investa-dark"
+                  }`}
+                  aria-pressed={mode === "investor"}
+                  aria-label="Switch to investor mode"
+                >
+                  <svg className="w-3.5 h-3.5 md:w-4 md:h-4 mr-1 md:mr-1.5 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 6V18M18 12H6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  </svg>
+                  <span>Investor</span>
+                </button>
+                <button
+                  onClick={() => setMode("startup")}
+                  className={`relative z-10 flex items-center min-w-[90px] justify-center py-2 px-4 md:px-6 rounded-full text-sm font-medium transition-all duration-300 ${
+                    mode === "startup"
+                      ? "text-white"
+                      : "text-investa-gray hover:text-investa-dark"
+                  }`}
+                  aria-pressed={mode === "startup"}
+                  aria-label="Switch to startup mode"
+                >
+                  <svg className="w-3.5 h-3.5 md:w-4 md:h-4 mr-1 md:mr-1.5 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 16L10 11L13 14L19 8M19 8H14M19 8V13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <span>Startup</span>
+                </button>
+              </div>
             </div>
             <Link href="/get-started">
               <button className="py-2 px-6 bg-investa-primary text-white rounded-full hover:bg-opacity-90 transition-all shadow-sm">
