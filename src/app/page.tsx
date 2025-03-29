@@ -9,7 +9,14 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white relative overflow-hidden">
       {/* Grid Pattern Background */}
-      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-transparent" />
+      <div className="absolute inset-0" style={{
+        backgroundImage: `linear-gradient(to right, #53505008 1px, transparent 1px), 
+                          linear-gradient(to bottom, #53505008 1px, transparent 1px)`,
+        backgroundSize: '50px 50px',
+        maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0) 100%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0) 100%)'
+      }} />
       
       <div className="relative z-10 px-6 py-8">
         {/* Navbar */}
