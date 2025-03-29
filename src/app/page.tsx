@@ -79,8 +79,8 @@ export default function Home() {
               </div>
             </div>
             <Link href="/get-started">
-              <button className="py-2 px-6 bg-investa-primary text-white rounded-full hover:bg-opacity-90 transition-all shadow-sm">
-                Sign In
+              <button className="h-10 px-8 border border-gray-300 text-black hover:bg-gray-50 transition-all font-medium text-sm flex items-center justify-center">
+                  Sign In
               </button>
             </Link>
           </div>
