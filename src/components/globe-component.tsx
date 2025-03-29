@@ -7,19 +7,20 @@ interface CompanyLogo {
   name: string
   position: { x: number; y: number }
   size: number
+  image: string
 }
 
 export default function GlobeComponent() {
   const globeRef = useRef<HTMLDivElement>(null)
 
-  // Sample company logos with positions
+  // Company logos with positions
   const companyLogos: CompanyLogo[] = [
-    { id: 1, name: "Company A", position: { x: 15, y: 20 }, size: 40 },
-    { id: 2, name: "Company B", position: { x: 65, y: 15 }, size: 50 },
-    { id: 3, name: "Company C", position: { x: 40, y: 30 }, size: 45 },
-    { id: 4, name: "Company D", position: { x: 75, y: 40 }, size: 35 },
-    { id: 5, name: "Company E", position: { x: 25, y: 50 }, size: 42 },
-    { id: 6, name: "Company F", position: { x: 55, y: 60 }, size: 38 },
+    { id: 1, name: "Reddit", position: { x: 22, y: 25 }, size: 65, image: "/companies/reddit.png" },
+    { id: 2, name: "Y Combinator", position: { x: 70, y: 18 }, size: 70, image: "/companies/yc.png" },
+    { id: 3, name: "Google", position: { x: 45, y: 35 }, size: 75, image: "/companies/google.png" },
+    { id: 4, name: "GitHub", position: { x: 78, y: 45 }, size: 60, image: "/companies/github.png" },
+    { id: 5, name: "Crunchbase", position: { x: 30, y: 58 }, size: 68, image: "/companies/cb.jpeg" },
+    { id: 6, name: "Product Hunt", position: { x: 60, y: 65 }, size: 64, image: "/companies/ph.png" },
   ]
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export default function GlobeComponent() {
 
     let rotation = 0
     const animate = () => {
-      rotation += 0.05
+      rotation += 0.02
       if (globe) {
         globe.style.transform = `rotateZ(${rotation}deg)`
       }
@@ -44,16 +45,16 @@ export default function GlobeComponent() {
   }, [])
 
   return (
-    <div className="relative w-full h-[500px] overflow-hidden mt-16">
+    <div className="relative w-full h-[600px] overflow-hidden mt-12">
       {/* Globe Base */}
-      <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2">
+      <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/3">
         {/* Main Globe */}
         <div
           ref={globeRef}
-          className="w-[800px] h-[800px] rounded-full relative"
+          className="w-[900px] h-[900px] rounded-full relative"
           style={{
             background: "radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(241, 53, 5, 0.05))",
-            boxShadow: "inset 0 0 50px rgba(241, 53, 5, 0.2), 0 0 30px rgba(241, 53, 5, 0.1)",
+            boxShadow: "inset 0 0 60px rgba(241, 53, 5, 0.2), 0 0 40px rgba(241, 53, 5, 0.15)",
             border: "1px solid rgba(241, 53, 5, 0.1)",
           }}
         >
@@ -81,23 +82,29 @@ export default function GlobeComponent() {
           {companyLogos.map((logo) => (
             <div
               key={logo.id}
-              className="absolute flex items-center justify-center bg-white rounded-full shadow-lg transform hover:scale-110 transition-transform duration-300"
+              className="absolute flex items-center justify-center bg-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 group"
               style={{
                 left: `${logo.position.x}%`,
                 top: `${logo.position.y}%`,
                 width: `${logo.size}px`,
                 height: `${logo.size}px`,
                 zIndex: 10,
+                border: "2px solid rgba(255, 255, 255, 0.8)",
+                boxShadow: "0 5px 15px rgba(0, 0, 0, 0.1)"
               }}
             >
-              <div className="w-3/4 h-3/4 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+              <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden p-2.5">
                 <Image
-                  src={`/placeholder.svg?height=${logo.size}&width=${logo.size}`}
+                  src={logo.image}
                   alt={logo.name}
-                  width={logo.size}
-                  height={logo.size}
-                  className="object-cover"
+                  width={logo.size * 1.5}
+                  height={logo.size * 1.5}
+                  className="object-contain w-full h-full"
+                  priority
                 />
+              </div>
+              <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs rounded-md px-2 py-1 pointer-events-none whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                {logo.name}
               </div>
             </div>
           ))}
