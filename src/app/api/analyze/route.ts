@@ -14,44 +14,40 @@ const client = new OpenAI({
   baseURL: "https://api.perplexity.ai",
 });
 
-const systemPrompt = `You are a product analysis assistant. Analyze the provided product idea and return a JSON response.
+const systemPrompt = `You are an investment research assistant. Analyze the provided problem or product idea and return a JSON response.
 IMPORTANT: Your response must be ONLY valid JSON with NO markdown, NO code blocks, and NO additional text.
-The originality score must be a number between 0 and 100 depending on how unique the product idea is. If there are multiple products doing the exact same thing, the originality score should be less than 20. 
-If there are no other products with the exact same features, the originality score should be above 85. 
-Otherwise, if there are few other products with similar features, depending on how similar they are, and how many of them there are, the originality score should be between 20 and 85.
 
-For competitors:
-- Only include direct competitors that are actually operating in the market
+For startups/products:
+- Only include companies/products that are actively operating in the market
 - For the URL field, you must:
-  * Include ONLY the official website URL of the competitor
+  * Include ONLY the official website URL of the company/product
   * Ensure it's the company's main domain (e.g., "https://company.com")
   * Do NOT include URLs to news articles, press releases, or third-party websites
   * If you cannot find or verify the official URL, use an empty string ""
-- Include only relevant competitors
-- If there are no relevant competitors, return an empty array
+- Include only relevant startups/products
+- If there are no relevant startups/products, return an empty array
 
 The response must exactly match this structure:
 {
   "result": {
     "problem_statement": "string describing the problem being solved",
-    "competitive_analysis": {
+    "market_analysis": {
       "overview": "string summarizing market analysis",
-      "competitors": [
+      "startups": [
         {
           "name": "string",
           "description": "string",
           "features": ["string"],
-          "unique_elements": "string",
+          "funding_stage": "string (e.g., 'Seed', 'Series A', 'Series B', etc.)",
           "url": "string with ONLY the official company website URL or empty string"
         }
       ]
     },
-    "unique_selling_proposition": {
-      "suggested_improvements": "string"
+    "investment_opportunity": {
+      "growth_potential": "string describing growth potential"
     },
     "conclusion": {
-      "viability_summary": "string",
-      "originality_score": number
+      "investment_summary": "string",
     }
   }
 }
@@ -133,7 +129,8 @@ export async function POST(request: Request) {
         const analysisResult = parsed.result;
         console.log("Analysis result structure:", {
           has_problem_statement: !!analysisResult.problem_statement,
-          has_competitive_analysis: !!analysisResult.competitive_analysis,
+          has_market_analysis: !!analysisResult.market_analysis,
+          has_investment_opportunity: !!analysisResult.investment_opportunity,
           has_conclusion: !!analysisResult.conclusion,
         });
 

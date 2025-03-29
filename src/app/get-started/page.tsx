@@ -20,11 +20,11 @@ interface ChatResponse {
   githubResults?: GitHubResult[];
 }
 
-interface Competitor {
+interface Startup {
   name: string;
   description: string;
   features: string[];
-  unique_elements: string;
+  funding_stage: string;
   url: string;
 }
 
@@ -34,13 +34,14 @@ interface InputProps {
   ) => void;
   value: string;
   error?: boolean;
+  placeholder?: string;
 }
 
 const Chatbot: React.FC = () => {
   const [productIdea, setProductIdea] = useState("");
   const [response, setResponse] = useState<ChatResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [expandedCompetitors, setExpandedCompetitors] = useState<Set<number>>(
+  const [expandedStartups, setExpandedStartups] = useState<Set<number>>(
     new Set()
   );
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -48,9 +49,9 @@ const Chatbot: React.FC = () => {
   const resultsRef = useRef<HTMLDivElement>(null);
 
   const suggestions = [
-    "A social media app for pet owners",
-    "AI-powered meal planner",
-    "Platform to manage all your subscriptions",
+    "AI-powered healthcare solutions",
+    "Sustainable energy technology",
+    "Remote work collaboration tools",
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -160,18 +161,6 @@ const Chatbot: React.FC = () => {
     }
   };
 
-  const toggleCompetitor = (index: number) => {
-    setExpandedCompetitors((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(index)) {
-        newSet.delete(index);
-      } else {
-        newSet.add(index);
-      }
-      return newSet;
-    });
-  };
-
   const formatAnalysisContent = (content: string) => {
     try {
       console.log("Original content:", content);
@@ -199,292 +188,112 @@ const Chatbot: React.FC = () => {
       }
 
       const formattedContent = `
-        <div class="space-y-6 lg:space-y-0">
-          <!-- Main Content Grid -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <!-- Left Column -->
-            <div class="space-y-6">
-              <section class="transform hover:scale-[1.01] transition-transform duration-200">
-                <div class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-[1px]">
-                  <div class="bg-gray-900/60 backdrop-blur-xl rounded-2xl p-6">
-                    <h2 class="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-                      Problem Statement
-                    </h2>
-                    <div class="text-gray-200 leading-relaxed">
-                      ${analysisData.problem_statement}
-                    </div>
-                  </div>
+        <div class="space-y-6">
+          <!-- Main Content - Single Column -->
+          <section class="transform hover:scale-[1.01] transition-transform duration-200">
+            <div class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-[1px]">
+              <div class="bg-gray-900/60 backdrop-blur-xl rounded-2xl p-6">
+                <h2 class="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                  Problem Statement
+                </h2>
+                <div class="text-gray-200 leading-relaxed">
+                  ${analysisData.problem_statement}
                 </div>
-              </section>
-
-              <section class="transform hover:scale-[1.01] transition-transform duration-200">
-                <div class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-[1px]">
-                  <div class="bg-gray-900/60 backdrop-blur-xl rounded-2xl p-6">
-                    <h2 class="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-                      Competitive Analysis
-                    </h2>
-                    <div class="text-gray-200 leading-relaxed mb-6">
-                      ${analysisData.competitive_analysis.overview}
-                    </div>
-                    
-                    <h3 class="text-xl font-semibold mb-4 text-blue-300">Competitors</h3>
-                    <div class="space-y-4">
-                      ${
-                        analysisData.competitive_analysis.competitors.length ===
-                        0
-                          ? `
-                          <div class="bg-gray-800/50 rounded-xl border border-gray-700/50 p-6">
-                            <div class="flex items-center gap-3 text-gray-300">
-                              <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                              </svg>
-                              <span>No direct competitors found for this product idea.</span>
-                            </div>
-                          </div>
-                        `
-                          : analysisData.competitive_analysis.competitors
-                              .map(
-                                (competitor: Competitor, index: number) => `
-                              <div class="bg-gray-800/50 rounded-xl border border-gray-700/50 overflow-hidden" data-competitor-index="${index}">
-                                <button class="w-full p-4 text-left flex items-center justify-between cursor-pointer hover:bg-gray-700/30 transition-colors" 
-                                        onclick="document.dispatchEvent(new CustomEvent('toggleCompetitor', { detail: ${index} }))">
-                                  <h4 class="font-semibold text-blue-300">${
-                                    competitor.name
-                                  }</h4>
-                                  <div class="flex items-center gap-2">
-                                    <span class="text-xs px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full border border-blue-500/20">
-                                      Competitor ${index + 1}
-                                    </span>
-                                    <svg class="w-5 h-5 transition-transform competitor-arrow text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                  </div>
-                                </button>
-                                <div class="competitor-content hidden p-6 border-t border-gray-700/50 bg-gray-800/30">
-                                  <div class="space-y-4">
-                                    <div>
-                                      <p class="text-sm text-blue-300 mb-2 font-semibold">Description:</p>
-                                      <p class="text-gray-300">${
-                                        competitor.description
-                                      }</p>
-                                    </div>
-                                    <div>
-                                      <p class="text-sm text-blue-300 mb-2 font-semibold">Key Features:</p>
-                                      <ul class="grid grid-cols-1 gap-2">
-                                        ${competitor.features
-                                          .map(
-                                            (feature) => `
-                                          <li class="flex items-center gap-2 text-gray-300">
-                                            <svg class="w-4 h-4 flex-shrink-0 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4" />
-                                            </svg>
-                                            <span class="text-sm md:text-base">${feature}</span>
-                                          </li>
-                                        `
-                                          )
-                                          .join("")}
-                                      </ul>
-                                    </div>
-                                    <div class="border-t border-gray-700/50 pt-4">
-                                      <p class="text-sm text-blue-300 font-semibold mb-2">Unique Elements:</p>
-                                      <p class="text-gray-300 pl-4 border-l-2 border-blue-500/30">
-                                        ${competitor.unique_elements}
-                                      </p>
-                                    </div>
-                                    ${
-                                      competitor.url
-                                        ? `
-                                      <div class="border-t border-gray-700/50 pt-4">
-                                        <p class="text-sm text-blue-300 font-semibold mb-2">Website:</p>
-                                        <a href="${competitor.url}" 
-                                           target="_blank" 
-                                           rel="noopener noreferrer" 
-                                           class="text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-2">
-                                          <span>${competitor.url}</span>
-                                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                          </svg>
-                                        </a>
-                                      </div>
-                                    `
-                                        : ""
-                                    }
-                                  </div>
-                                </div>
-                              </div>
-                            `
-                              )
-                              .join("")
-                      }
-                    </div>
-                  </div>
-                </div>
-              </section>
+              </div>
             </div>
+          </section>
 
-            <!-- Right Column -->
-            <div class="space-y-6">
-              <section class="transform hover:scale-[1.01] transition-transform duration-200">
-                <div class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-[1px]">
-                  <div class="bg-gray-900/60 backdrop-blur-xl rounded-2xl p-6">
-                    <h2 class="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-                      Unique Selling Proposition
-                    </h2>
-                    <div class="text-gray-200 leading-relaxed">
-                      ${
-                        analysisData.unique_selling_proposition
-                          .suggested_improvements
-                      }
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              <section class="transform hover:scale-[1.01] transition-transform duration-200">
-                <div class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-[1px]">
-                  <div class="bg-gray-900/60 backdrop-blur-xl rounded-2xl p-6">
-                    <h2 class="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-                      Conclusion
-                    </h2>
-                    <div class="text-gray-200 leading-relaxed">
-                      ${analysisData.conclusion.viability_summary}
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              <!-- Originality Score - Bottom right on desktop, end on mobile -->
-              <section class="transform hover:scale-[1.01] transition-transform duration-200">
-                <div class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-[1px]">
-                  <div class="bg-gray-900/60 backdrop-blur-xl rounded-2xl p-6">
-                    <div class="bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-xl p-6 backdrop-blur-sm">
-                      <div class="text-center">
-                        <h3 class="text-xl font-semibold mb-4 text-blue-300">Approachability</h3>
-                        <div class="flex items-center justify-center gap-2 mb-4">
-                          <p class="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-                            ${analysisData.conclusion.originality_score}
-                          </p>
-                          <span class="text-2xl text-gray-400">/100</span>
-                        </div>
-                        <button 
-                          class="text-sm text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1 mx-auto"
-                          onclick="document.getElementById('score-explanation').classList.toggle('hidden')"
-                        >
-                          How did I get my score?
-                          <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          <section class="transform hover:scale-[1.01] transition-transform duration-200">
+            <div class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-[1px]">
+              <div class="bg-gray-900/60 backdrop-blur-xl rounded-2xl p-6">
+                <h2 class="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                  Active Startups
+                </h2>
+                <div class="space-y-4">
+                  ${
+                    analysisData.market_analysis.startups.length === 0
+                      ? `
+                      <div class="bg-gray-800/50 rounded-xl border border-gray-700/50 p-6">
+                        <div class="flex items-center gap-3 text-gray-300">
+                          <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
-                        </button>
-                        <div id="score-explanation" class="hidden mt-4 text-left bg-gray-800/50 rounded-xl p-4 border border-gray-700/50">
-                          <p class="text-sm text-gray-300 mb-2">
-                            The approachability score is determined by evaluating how unique and innovative a product is compared to existing solutions in the market.
-                          </p>
-                          <p class="text-sm text-gray-300">
-                            We consider factors such as:
-                          </p>
-                          <ul class="mt-2 space-y-1">
-                            <li class="text-sm text-gray-300 flex items-center gap-2">
-                              <svg class="w-3 h-3 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                              </svg>
-                              Technological integration
-                            </li>
-                            <li class="text-sm text-gray-300 flex items-center gap-2">
-                              <svg class="w-3 h-3 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                              </svg>
-                              Market demand
-                            </li>
-                            <li class="text-sm text-gray-300 flex items-center gap-2">
-                              <svg class="w-3 h-3 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                              </svg>
-                              Competition saturation
-                            </li>
-                            <li class="text-sm text-gray-300 flex items-center gap-2">
-                              <svg class="w-3 h-3 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                              </svg>
-                              Brand positioning
-                            </li>
-                            <li class="text-sm text-gray-300 flex items-center gap-2">
-                              <svg class="w-3 h-3 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                              </svg>
-                              Geographical location
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-
-          ${
-            response &&
-            response.githubResults &&
-            response.githubResults.length > 0
-              ? `
-            <!-- GitHub Results Section -->
-            <section class="mt-8 transform hover:scale-[1.01] transition-transform duration-200">
-              <div class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-[1px]">
-                <div class="bg-gray-900/60 backdrop-blur-xl rounded-2xl p-6">
-                  <h2 class="text-2xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-                    Related GitHub Projects
-                  </h2>
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    ${response.githubResults
-                      .map(
-                        (repo) => `
-                      <div class="bg-gray-800/50 rounded-xl border border-gray-700/50 p-4 hover:border-blue-500/30 transition-colors">
-                        <div class="flex items-start justify-between gap-4">
-                          <div class="flex-1">
-                            <a href="${repo.url}" 
-                               target="_blank" 
-                               rel="noopener noreferrer" 
-                               class="text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-2">
-                              ${repo.name}
-                              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                              </svg>
-                            </a>
-                            <p class="text-sm text-gray-300 mt-2">${
-                              repo.description || "No description available"
-                            }</p>
-                          </div>
-                        </div>
-                        <div class="flex items-center gap-4 mt-3 text-sm">
-                          ${
-                            repo.language
-                              ? `
-                            <span class="text-gray-400 flex items-center gap-1">
-                              <span class="w-2 h-2 rounded-full bg-blue-400"></span>
-                              ${repo.language}
-                            </span>
-                          `
-                              : ""
-                          }
-                          <span class="text-gray-400 flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M12 .587l3.668 7.431 8.332 1.21-6.001 5.85 1.416 8.265L12 19.127l-7.417 3.89 1.416-8.265-6.001-5.85 8.332-1.21L12 .587z"/>
-                            </svg>
-                            ${repo.stars}
-                          </span>
+                          <span>No active startups found in this space.</span>
                         </div>
                       </div>
                     `
-                      )
-                      .join("")}
-                  </div>
+                      : analysisData.market_analysis.startups
+                          .map(
+                            (startup: Startup, index: number) => `
+                          <div class="bg-gray-800/50 rounded-xl border border-gray-700/50 overflow-hidden" data-startup-index="${index}">
+                            <button class="w-full p-4 text-left flex items-center justify-between cursor-pointer hover:bg-gray-700/30 transition-colors" 
+                                    onclick="document.dispatchEvent(new CustomEvent('toggleStartup', { detail: ${index} }))">
+                              <h4 class="font-semibold text-blue-300">${
+                                startup.name
+                              }</h4>
+                              <div class="flex items-center gap-2">
+                                <span class="text-xs px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full border border-blue-500/20">
+                                  ${startup.funding_stage}
+                                </span>
+                                <svg class="w-5 h-5 transition-transform startup-arrow text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                              </div>
+                            </button>
+                            <div class="startup-content hidden p-6 border-t border-gray-700/50 bg-gray-800/30">
+                              <div class="space-y-4">
+                                <div>
+                                  <p class="text-sm text-blue-300 mb-2 font-semibold">Description:</p>
+                                  <p class="text-gray-300">${
+                                    startup.description
+                                  }</p>
+                                </div>
+                                <div>
+                                  <p class="text-sm text-blue-300 mb-2 font-semibold">Key Features:</p>
+                                  <ul class="grid grid-cols-1 gap-2">
+                                    ${startup.features
+                                      .map(
+                                        (feature) => `
+                                      <li class="flex items-center gap-2 text-gray-300">
+                                        <svg class="w-4 h-4 flex-shrink-0 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4" />
+                                        </svg>
+                                        <span class="text-sm md:text-base">${feature}</span>
+                                      </li>
+                                    `
+                                      )
+                                      .join("")}
+                                  </ul>
+                                </div>
+                                ${
+                                  startup.url
+                                    ? `
+                                  <div class="border-t border-gray-700/50 pt-4">
+                                    <p class="text-sm text-blue-300 font-semibold mb-2">Website:</p>
+                                    <a href="${startup.url}" 
+                                       target="_blank" 
+                                       rel="noopener noreferrer" 
+                                       class="text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-2">
+                                      <span>${startup.url}</span>
+                                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                      </svg>
+                                    </a>
+                                  </div>
+                                `
+                                    : ""
+                                }
+                              </div>
+                            </div>
+                          </div>
+                        `
+                          )
+                          .join("")
+                  }
                 </div>
               </div>
-            </section>
-          `
-              : ""
-          }
+            </div>
+          </section>
         </div>
       `;
 
@@ -495,34 +304,34 @@ const Chatbot: React.FC = () => {
     }
   };
 
-  // Add event listener for competitor toggles
+  // Add event listener for startup toggles
   React.useEffect(() => {
     const handleToggle = (event: CustomEvent<number>) => {
-      toggleCompetitor(event.detail);
+      toggleStartup(event.detail);
     };
 
     document.addEventListener(
-      "toggleCompetitor",
+      "toggleStartup",
       handleToggle as EventListener
     );
     return () => {
       document.removeEventListener(
-        "toggleCompetitor",
+        "toggleStartup",
         handleToggle as EventListener
       );
     };
   }, []);
 
-  // Update competitor visibility when expandedCompetitors changes
+  // Update startup visibility when expandedStartups changes
   React.useEffect(() => {
     if (!response) return;
 
-    document.querySelectorAll("[data-competitor-index]").forEach((el) => {
-      const index = parseInt(el.getAttribute("data-competitor-index") || "0");
-      const content = el.querySelector(".competitor-content");
-      const arrow = el.querySelector(".competitor-arrow");
+    document.querySelectorAll("[data-startup-index]").forEach((el) => {
+      const index = parseInt(el.getAttribute("data-startup-index") || "0");
+      const content = el.querySelector(".startup-content");
+      const arrow = el.querySelector(".startup-arrow");
 
-      if (expandedCompetitors.has(index)) {
+      if (expandedStartups.has(index)) {
         content?.classList.remove("hidden");
         arrow?.classList.add("rotate-180");
       } else {
@@ -530,7 +339,19 @@ const Chatbot: React.FC = () => {
         arrow?.classList.remove("rotate-180");
       }
     });
-  }, [expandedCompetitors, response]);
+  }, [expandedStartups, response]);
+
+  const toggleStartup = (index: number) => {
+    setExpandedStartups((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(index)) {
+        newSet.delete(index);
+      } else {
+        newSet.add(index);
+      }
+      return newSet;
+    });
+  };
 
   // Add this function to handle suggestion clicks
   const handleSuggestionClick = (suggestion: string) => {
@@ -545,7 +366,7 @@ const Chatbot: React.FC = () => {
       setIsLoading(false);
       setLoadingProgress(0);
       setInputError(null);
-      setExpandedCompetitors(new Set());
+      setExpandedStartups(new Set());
     };
   }, []);
 
@@ -577,18 +398,17 @@ const Chatbot: React.FC = () => {
           <div className="mb-4">
             <img
               src="/image.png"
-              alt="Map Image here"
+              alt="Investment Research"
               className="w-[480px] md:w-[480px] mx-auto object-contain animate-float"
             />
           </div>
           <h1 className="text-2xl sm:text-3xl lg:text-3xl font-bold mb-4">
             <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 pb-1">
-              Have an idea? Find out if it already exists.
+              Find Investment Opportunities
             </span>
           </h1>
           <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
-            Find out how unique your idea is and identify gaps in existing
-            products to refine your proposition.
+            Discover promising startups and market opportunities in your area of interest.
           </p>
         </div>
 
@@ -642,7 +462,7 @@ const Chatbot: React.FC = () => {
             >
               {isLoading ? (
                 <>
-                  <div className="relative z-10">Analyzing...</div>
+                  <div className="relative z-10">Researching...</div>
                   <div
                     className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600"
                     style={{
@@ -663,7 +483,7 @@ const Chatbot: React.FC = () => {
                   />
                 </>
               ) : (
-                "Analyze Idea"
+                "Research Opportunities"
               )}
             </button>
           </div>
