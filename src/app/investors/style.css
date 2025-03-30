@@ -1,0 +1,288 @@
+/* Investor page styles */
+
+.main_data_block {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #FAFAFA;
+  display: flex;
+  position: relative;
+  color: #333;
+}
+
+/* Add global text color */
+h1, h2, h3, h4, h5, h6, p, div, span, a, button, input, select, textarea {
+  color: #333;
+}
+
+.side_bars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 280px;
+  padding: 24px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.section_780 {
+  width: 100%;
+  max-width: 780px;
+  margin-left: 280px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.section_block {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  padding: 24px;
+  border-radius: 16px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.horizontal_block {
+  display: flex;
+  align-items: center;
+}
+
+.vertical_block {
+  display: flex;
+  flex-direction: column;
+}
+
+.gap_32 {
+  gap: 32px;
+}
+
+.gap_12 {
+  gap: 12px;
+}
+
+.gap_8 {
+  gap: 8px;
+}
+
+.gap_4 {
+  gap: 4px;
+}
+
+.layout_justify_stretch {
+  justify-content: space-between;
+}
+
+.side_bar_new {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.side_bar_navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.side_bar_item, .side_bar_item_gradient {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.side_bar_item:hover {
+  background-color: #F5F5F5;
+}
+
+.side_bar_item_gradient {
+  background: linear-gradient(90deg, #f13505 0%, #ff6e4a 100%);
+  color: white;
+}
+
+.flex_align_stretch {
+  align-items: stretch;
+}
+
+.tag_block {
+  display: inline-flex;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.tag_block.black {
+  background-color: #EFEFEF;
+  color: #333;
+}
+
+.tag_block.green {
+  background-color: #D5F5E3;
+  color: #1E8449;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.black {
+  color: #333;
+}
+
+.secondary {
+  color: #555;
+}
+
+.center_align {
+  text-align: center;
+}
+
+.left-align {
+  text-align: left;
+}
+
+.details-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.paragraph_m {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.secondary_button {
+  display: flex;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.relative_with_icon_no_border {
+  position: relative;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.icon._30px {
+  width: 30px;
+  height: 30px;
+}
+
+.icon._24px {
+  width: 24px;
+  height: 24px;
+}
+
+.icon._20px {
+  width: 20px;
+  height: 20px;
+}
+
+.w-clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.logo._128px, .special_block_logo_first_characters._128px {
+  width: 128px;
+  height: 128px;
+}
+
+.special_block_logo_first_characters._48px {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  background-color: #f13505;
+}
+
+.special_block_small_table_row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #EFEFEF;
+}
+
+.layout_align_left {
+  align-items: flex-start;
+}
+
+.flex_grow {
+  flex-grow: 1;
+}
+
+.mobile_vertical {
+  display: flex;
+  gap: 24px;
+}
+
+.investor-description {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wrap-mobile {
+  flex-wrap: wrap;
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+  .mobile_side_bar {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 16px;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
+
+  .desktop_side_bar {
+    display: none;
+  }
+
+  .section_780 {
+    margin-left: 0;
+    padding-top: 72px;
+  }
+
+  .mobile_vertical {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+/* Desktop Styles */
+@media screen and (min-width: 769px) {
+  .mobile_side_bar {
+    display: none;
+  }
+
+  .desktop_side_bar {
+    display: block;
+  }
+} 
