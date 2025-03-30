@@ -214,7 +214,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ isOpen, onClose }) => {
                     }
                   }}
                   style={{
-                    backgroundColor: "#0070F3",
+                    backgroundColor: "#f13505",
                     color: "white",
                     padding: "12px",
                     borderRadius: "8px",

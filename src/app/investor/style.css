@@ -380,7 +380,7 @@
     gap: 8px;
     padding: 8px 12px;
     border-radius: 8px;
-    background: linear-gradient(90deg, #0070F3 0%, #00A8FF 100%);
+    background: linear-gradient(90deg, #f13505 0%, #f13505 100%);
     color: white;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -581,7 +581,7 @@
 
   /* Buttons and UI Components */
   .primary_button {
-    background-color: #0070F3;
+    background-color: #f13505;
     color: white;
     padding: 12px 16px;
     border-radius: 8px;
@@ -593,7 +593,7 @@
   }
 
   .primary_button:hover {
-    background-color: #0060DF;
+    background-color: #f13505;
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
@@ -672,7 +672,7 @@
   }
 
   .secondary_button.relative_with_icon_no_border.linkedin:hover {
-    background-color: #0069a2;
+    background-color: #f13505;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 119, 181, 0.4);
   }
@@ -821,7 +821,7 @@
 
   .input_default:focus {
     outline: none;
-    border-color: #0070F3;
+    border-color: #f13505;
     box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
   }
 
@@ -897,7 +897,7 @@
   }
 
   .special_block_logo_first_characters {
-    background-color: #0070F3;
+    background-color: #f13505;
     color: white;
     border-radius: 50%;
     display: flex;
@@ -1070,5 +1070,5 @@
   .vertical_block.gap_8.layout_align_left.flex_grow h3 {
     margin: 0;
     font-size: 24px;
-    color: #0070F3;
+    color: #f13505;
   }
