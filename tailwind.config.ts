@@ -11,6 +11,11 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        investa: {
+          primary: "#f13505",
+          gray: "#535050",
+          dark: "#040404",
+        },
       },
     },
   },
