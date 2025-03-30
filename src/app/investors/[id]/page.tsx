@@ -549,13 +549,38 @@ export default function InvestorProfile({ params }: InvestorProfileProps) {
                       <div>Email</div>
                     </div>
                   </div>
-                  <div onClick={openSignUpModal} className="secondary_button relative_with_icon_no_border linkedin">
+                  <div 
+                    onClick={openSignUpModal} 
+                    className="secondary_button relative_with_icon_no_border linkedin" 
+                    style={{
+                      backgroundColor: "#0077B5", 
+                      width: "44px",
+                      height: "44px",
+                      padding: 0,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      boxShadow: "0 2px 6px rgba(0, 119, 181, 0.3)",
+                      transition: "all 0.2s ease"
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = "#f13505";
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                      e.currentTarget.style.boxShadow = "0 4px 10px rgba(0, 119, 181, 0.4)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = "#0077B5";
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "0 2px 6px rgba(0, 119, 181, 0.3)";
+                    }}
+                  >
                     <Image 
                       src="https://cdn.prod.website-files.com/645ce56c63c3364f2fcc8080/65b386839adfd3af6492f185_Icon%20(7).svg" 
                       alt="LinkedIn" 
                       width={24} 
                       height={24} 
                       className="icon _24px"
+                      style={{ filter: "brightness(10)" }}
                     />
                   </div>
                 </div>
