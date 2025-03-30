@@ -61,7 +61,7 @@ export default function GlobeComponent() {
           {companyLogos.map((logo) => (
             <div
               key={logo.id}
-              className="absolute flex items-center justify-center bg-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-125 transition-all duration-300 group -mt-4"
+              className="absolute flex items-center justify-center bg-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-125 transition-all duration-300 group -mt-8 -ml-4"
               style={{
                 left: `${logo.position.x}%`,
                 top: `${logo.position.y}%`,
