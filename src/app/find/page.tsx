@@ -598,7 +598,7 @@ const Chatbot: React.FC = () => {
                 </div>
                 <div className="relative h-3 w-full max-w-md mx-auto bg-gray-200 rounded-full overflow-hidden">
                   <div
-                    className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-400 via-investa-primary to-purple-400 rounded-full"
+                    className="absolute top-0 left-0 h-full bg-investa-primary rounded-full"
                     style={{
                       width: `${loadingProgress}%`,
                       transition: "width 0.5s ease-out",
