@@ -21,9 +21,9 @@ export default function Home() {
         }}
       />
 
-      <div className="relative z-10 px-6 py-8">
+      <div className="relative z-10 px-6 pt-8 pb-0">
         {/* Navbar */}
-        <nav className="flex justify-between items-center mb-12 max-w-7xl mx-auto">
+        <nav className="flex justify-between items-center mb-8 max-w-7xl mx-auto">
           <div className="font-bold text-3xl text-investa-primary">Renvue</div>
           <div className="flex items-center gap-4">
             {/* Mode Toggle - Elite Design */}
@@ -100,7 +100,7 @@ export default function Home() {
         </nav>
 
         {/* Centered Hero Section */}
-        <div className="max-w-5xl mx-auto text-center mb-16">
+        <div className="max-w-5xl mx-auto text-center mb-12">
           <h1 className="text-4xl md:text-6xl font-bold text-investa-dark leading-tight mb-6">
             {mode === "investor"
               ? "Discover promising startups for your portfolio"
@@ -132,57 +132,59 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Conditional Content Based on Mode */}
-        {mode === "investor" ? (
-          <GlobeComponent />
-        ) : (
-          <div className="max-w-6xl mx-auto">
-            <div className="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100">
-              <div className="bg-gray-50 p-3 border-b border-gray-100 flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                </div>
-                <div className="text-xs text-investa-gray">Startup Profile</div>
-                <div className="w-12"></div>
-              </div>
-              <div className="p-8 grid grid-cols-2 md:grid-cols-3 gap-6">
-                <div className="col-span-1 space-y-6">
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    <h3 className="font-semibold text-investa-dark mb-1">Profile Completion</h3>
-                    <div className="w-full bg-gray-200 rounded-full h-2.5 mt-4">
-                      <div className="bg-investa-primary h-2.5 rounded-full w-[85%]"></div>
-                    </div>
-                    <div className="mt-2 text-xs text-right text-investa-gray">85%</div>
+        {/* Globe or Startup Section */}
+        <div className="relative mx-auto">
+          {mode === "investor" ? (
+            <GlobeComponent />
+          ) : (
+            <div className="max-w-6xl mx-auto">
+              <div className="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100">
+                <div className="bg-gray-50 p-3 border-b border-gray-100 flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-400"></div>
                   </div>
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    <h3 className="font-semibold text-investa-dark mb-1">Investor Interest</h3>
-                    <div className="mt-3 space-y-2">
-                      <div className="h-3 w-full bg-gray-200 rounded"></div>
-                      <div className="h-3 w-5/6 bg-gray-200 rounded"></div>
-                    </div>
-                  </div>
+                  <div className="text-xs text-investa-gray">Startup Profile</div>
+                  <div className="w-12"></div>
                 </div>
-                <div className="col-span-2 bg-gradient-to-br from-investa-primary/10 to-investa-primary/5 rounded-lg p-6">
-                  <h3 className="font-semibold text-investa-dark mb-1">Investor Matches</h3>
-                  <p className="text-sm text-investa-gray">Investors interested in your sector</p>
-                  <div className="mt-4 space-y-3">
-                    {[1, 2, 3].map((i) => (
-                      <div key={i} className="bg-white p-3 rounded-md shadow-sm flex items-center">
-                        <div className="w-8 h-8 rounded-full bg-gray-200 mr-3"></div>
-                        <div>
-                          <div className="h-3 w-32 bg-gray-200 rounded"></div>
-                          <div className="h-2 w-24 bg-gray-100 rounded mt-2"></div>
-                        </div>
+                <div className="p-8 grid grid-cols-2 md:grid-cols-3 gap-6">
+                  <div className="col-span-1 space-y-6">
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <h3 className="font-semibold text-investa-dark mb-1">Profile Completion</h3>
+                      <div className="w-full bg-gray-200 rounded-full h-2.5 mt-4">
+                        <div className="bg-investa-primary h-2.5 rounded-full w-[85%]"></div>
                       </div>
-                    ))}
+                      <div className="mt-2 text-xs text-right text-investa-gray">85%</div>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <h3 className="font-semibold text-investa-dark mb-1">Investor Interest</h3>
+                      <div className="mt-3 space-y-2">
+                        <div className="h-3 w-full bg-gray-200 rounded"></div>
+                        <div className="h-3 w-5/6 bg-gray-200 rounded"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-span-2 bg-gradient-to-br from-investa-primary/10 to-investa-primary/5 rounded-lg p-6">
+                    <h3 className="font-semibold text-investa-dark mb-1">Investor Matches</h3>
+                    <p className="text-sm text-investa-gray">Investors interested in your sector</p>
+                    <div className="mt-4 space-y-3">
+                      {[1, 2, 3].map((i) => (
+                        <div key={i} className="bg-white p-3 rounded-md shadow-sm flex items-center">
+                          <div className="w-8 h-8 rounded-full bg-gray-200 mr-3"></div>
+                          <div>
+                            <div className="h-3 w-32 bg-gray-200 rounded"></div>
+                            <div className="h-2 w-24 bg-gray-100 rounded mt-2"></div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </main>
   )
