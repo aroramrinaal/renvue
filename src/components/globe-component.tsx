@@ -15,12 +15,12 @@ export default function GlobeComponent() {
 
   // Company logos with positions - all positioned in top half of globe
   const companyLogos: CompanyLogo[] = [
-    { id: 1, name: "Reddit", position: { x: 28, y: 25 }, size: 55, image: "/companies/reddit.png" },
-    { id: 2, name: "Y Combinator", position: { x: 72, y: 20 }, size: 60, image: "/companies/yc.png" },
-    { id: 3, name: "Google", position: { x: 50, y: 32 }, size: 65, image: "/companies/google.png" },
-    { id: 4, name: "GitHub", position: { x: 65, y: 38 }, size: 55, image: "/companies/github.png" },
-    { id: 5, name: "Crunchbase", position: { x: 35, y: 38 }, size: 55, image: "/companies/cb.jpeg" },
-    { id: 6, name: "Product Hunt", position: { x: 50, y: 15 }, size: 55, image: "/companies/ph.png" },
+    { id: 1, name: "Reddit", position: { x: 28, y: 20 }, size: 55, image: "/companies/reddit.png" },
+    { id: 2, name: "Y Combinator", position: { x: 72, y: 15 }, size: 60, image: "/companies/yc.png" },
+    { id: 3, name: "Google", position: { x: 50, y: 25 }, size: 65, image: "/companies/google.png" },
+    { id: 4, name: "GitHub", position: { x: 65, y: 30 }, size: 55, image: "/companies/github.png" },
+    { id: 5, name: "Crunchbase", position: { x: 35, y: 30 }, size: 55, image: "/companies/cb.jpeg" },
+    { id: 6, name: "Product Hunt", position: { x: 50, y: 10 }, size: 55, image: "/companies/ph.png" },
   ]
 
   return (
@@ -61,7 +61,7 @@ export default function GlobeComponent() {
           {companyLogos.map((logo) => (
             <div
               key={logo.id}
-              className="absolute flex items-center justify-center bg-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-125 transition-all duration-300 group"
+              className="absolute flex items-center justify-center bg-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-125 transition-all duration-300 group -mt-4"
               style={{
                 left: `${logo.position.x}%`,
                 top: `${logo.position.y}%`,
@@ -90,26 +90,26 @@ export default function GlobeComponent() {
 
           {/* Glowing Dots - Focused more in the top half */}
           {[
-            { left: "21%", top: "26%", width: "4.5px", height: "3.2px", opacity: 0.5 },
-            { left: "81%", top: "35%", width: "3.2px", height: "6px", opacity: 0.6 },
-            { left: "51%", top: "25%", width: "2.8px", height: "2.5px", opacity: 0.5 },
-            { left: "80%", top: "29%", width: "5.3px", height: "3.8px", opacity: 0.5 },
-            { left: "32%", top: "37%", width: "5.2px", height: "4.9px", opacity: 0.55 },
-            { left: "12%", top: "32%", width: "3.8px", height: "3.5px", opacity: 0.45 },
-            { left: "45%", top: "15%", width: "4.2px", height: "4.5px", opacity: 0.6 },
-            { left: "67%", top: "38%", width: "3.9px", height: "3.6px", opacity: 0.5 },
-            { left: "37%", top: "22%", width: "4.6px", height: "4.1px", opacity: 0.55 },
-            { left: "75%", top: "22%", width: "4.1px", height: "3.7px", opacity: 0.5 },
-            { left: "25%", top: "35%", width: "3.5px", height: "3.9px", opacity: 0.45 },
-            { left: "58%", top: "28%", width: "4.3px", height: "4.8px", opacity: 0.55 },
-            { left: "19%", top: "18%", width: "3.4px", height: "3.3px", opacity: 0.45 },
-            { left: "84%", top: "15%", width: "4.7px", height: "4.3px", opacity: 0.5 },
-            { left: "42%", top: "42%", width: "3.6px", height: "3.8px", opacity: 0.45 },
-            { left: "62%", top: "28%", width: "4.4px", height: "4.2px", opacity: 0.55 },
-            { left: "29%", top: "17%", width: "4.0px", height: "4.0px", opacity: 0.45 },
-            { left: "70%", top: "25%", width: "3.7px", height: "4.6px", opacity: 0.55 },
-            { left: "15%", top: "27%", width: "4.5px", height: "4.4px", opacity: 0.5 },
-            { left: "90%", top: "33%", width: "3.3px", height: "3.1px", opacity: 0.45 }
+            { left: "21%", top: "21%", width: "4.5px", height: "3.2px", opacity: 0.5 },
+            { left: "81%", top: "27%", width: "3.2px", height: "6px", opacity: 0.6 },
+            { left: "51%", top: "20%", width: "2.8px", height: "2.5px", opacity: 0.5 },
+            { left: "80%", top: "23%", width: "5.3px", height: "3.8px", opacity: 0.5 },
+            { left: "32%", top: "29%", width: "5.2px", height: "4.9px", opacity: 0.55 },
+            { left: "12%", top: "25%", width: "3.8px", height: "3.5px", opacity: 0.45 },
+            { left: "45%", top: "12%", width: "4.2px", height: "4.5px", opacity: 0.6 },
+            { left: "67%", top: "30%", width: "3.9px", height: "3.6px", opacity: 0.5 },
+            { left: "37%", top: "17%", width: "4.6px", height: "4.1px", opacity: 0.55 },
+            { left: "75%", top: "17%", width: "4.1px", height: "3.7px", opacity: 0.5 },
+            { left: "25%", top: "27%", width: "3.5px", height: "3.9px", opacity: 0.45 },
+            { left: "58%", top: "22%", width: "4.3px", height: "4.8px", opacity: 0.55 },
+            { left: "19%", top: "14%", width: "3.4px", height: "3.3px", opacity: 0.45 },
+            { left: "84%", top: "12%", width: "4.7px", height: "4.3px", opacity: 0.5 },
+            { left: "42%", top: "32%", width: "3.6px", height: "3.8px", opacity: 0.45 },
+            { left: "62%", top: "22%", width: "4.4px", height: "4.2px", opacity: 0.55 },
+            { left: "29%", top: "14%", width: "4.0px", height: "4.0px", opacity: 0.45 },
+            { left: "70%", top: "19%", width: "3.7px", height: "4.6px", opacity: 0.55 },
+            { left: "15%", top: "21%", width: "4.5px", height: "4.4px", opacity: 0.5 },
+            { left: "90%", top: "26%", width: "3.3px", height: "3.1px", opacity: 0.45 }
           ].map((dot, i) => (
             <div
               key={i}

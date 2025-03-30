@@ -2,10 +2,12 @@
 import { useState } from "react"
 import Link from "next/link"
 import GlobeComponent from "@/components/globe-component"
+import SignupModal from "@/components/SignupModal";
+import "./investor/style.css"
 
 export default function Home() {
   const [mode, setMode] = useState<"investor" | "startup">("investor")
-
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
   return (
     <main className="min-h-screen bg-white relative overflow-hidden">
       {/* Grid Pattern Background */}
@@ -21,10 +23,10 @@ export default function Home() {
         }}
       />
 
-      <div className="relative z-10 px-6 pt-8 pb-0">
+      <div className="relative z-10 px-4 pt-8 pb-0">
         {/* Navbar */}
-        <nav className="flex justify-between items-center mb-8 max-w-7xl mx-auto">
-          <div className="font-bold text-3xl text-investa-primary">Renvue</div>
+        <nav className="flex justify-between items-center mb-8 max-w-8xl mx-auto -mt-4">
+          <div className="font-bold text-4xl text-investa-primary">Renvue</div>
           <div className="flex items-center gap-4">
             {/* Mode Toggle - Elite Design */}
             <div className="relative flex items-center">
@@ -91,11 +93,11 @@ export default function Home() {
                 </button>
               </div>
             </div>
-            <Link href="/get-started" className="relative z-20">
-              <button className="h-10 px-8 bg-investa-dark text-white rounded-full hover:bg-opacity-90 transition-all font-medium text-sm flex items-center justify-center shadow-sm hover:shadow-md transform hover:scale-105">
+              <button className="h-10 px-8 bg-investa-dark text-white rounded-full hover:bg-opacity-90 transition-all font-medium text-sm flex items-center justify-center shadow-sm hover:shadow-md transform hover:scale-105"
+                onClick={() => setIsSignupModalOpen(true)}
+              >
                 Sign In
               </button>
-            </Link>
           </div>
         </nav>
 
@@ -120,15 +122,6 @@ export default function Home() {
             <button className="py-3 px-8 border-2 border-investa-gray text-investa-gray rounded-full text-lg font-medium hover:bg-gray-50 transition-all transform hover:scale-105">
               Learn More
             </button>
-          </div>
-          <div className="flex justify-center items-center space-x-4 text-investa-gray pt-6">
-            <span className="flex items-center">
-              <span className="text-investa-primary mr-1">✓</span> AI-powered matching
-            </span>
-            <span className="hidden md:inline">•</span>
-            <span className="flex items-center">
-              <span className="text-investa-primary mr-1">✓</span> Smart recommendations
-            </span>
           </div>
         </div>
 
@@ -186,6 +179,7 @@ export default function Home() {
           )}
         </div>
       </div>
+      <SignupModal isOpen={isSignupModalOpen} onClose={() => setIsSignupModalOpen(false)} />
     </main>
   )
 }
