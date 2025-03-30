@@ -102,7 +102,7 @@ export default function Home() {
         </nav>
 
         {/* Centered Hero Section */}
-        <div className="max-w-5xl mx-auto text-center mb-12 mt-12">
+        <div className="max-w-5xl mx-auto text-center mb-12 mt-8">
           <h1 className="text-4xl md:text-6xl font-bold text-investa-dark leading-tight mb-6">
             {mode === "investor"
               ? "Discover promising startups for your portfolio"
