@@ -21,6 +21,7 @@ export default function GlobeComponent() {
     { id: 4, name: "GitHub", position: { x: 65, y: 30 }, size: 55, image: "/companies/github.png" },
     { id: 5, name: "Crunchbase", position: { x: 35, y: 30 }, size: 55, image: "/companies/cb.jpeg" },
     { id: 6, name: "Product Hunt", position: { x: 50, y: 10 }, size: 55, image: "/companies/ph.png" },
+    { id: 7, name: "Acquire", position: { x: 40, y: 40 }, size: 55, image: "/companies/acquire.jpg" },
   ]
 
   return (
