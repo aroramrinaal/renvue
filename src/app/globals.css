@@ -56,12 +56,18 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --investa-primary: #f13505;
+  --investa-gray: #535050;
+  --investa-dark: #040404;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --investa-primary: #f13505;
+    --investa-gray: #535050;
+    --investa-dark: #040404;
   }
 }
 
