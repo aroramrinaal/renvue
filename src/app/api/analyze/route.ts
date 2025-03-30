@@ -18,7 +18,7 @@ const systemPrompt = `You are an investment research assistant. Analyze the prov
 IMPORTANT: Your response must be ONLY valid JSON with NO markdown, NO code blocks, and NO additional text.
 
 For startups/products:
-- Only include companies/products that are actively operating in the market
+- Only include companies/products that are actively operating in the market and are less than 10 years old valued at less than 1 billion USD
 - For the URL field, you must:
   * Include ONLY the official website URL of the company/product
   * Ensure it's the company's main domain (e.g., "https://company.com")
