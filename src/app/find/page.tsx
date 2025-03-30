@@ -49,8 +49,8 @@ const Chatbot: React.FC = () => {
   const resultsRef = useRef<HTMLDivElement>(null);
 
   const suggestions = [
-    "AI-powered healthcare solutions",
-    "Sustainable energy technology",
+    "Platform to manage all your subscriptions",
+    "AI-powered productivity tools",
     "Remote work collaboration tools",
   ];
 
@@ -125,24 +125,24 @@ const Chatbot: React.FC = () => {
       setResponse({
         content: `
           <div class="space-y-6">
-            <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-6 backdrop-blur-sm">
-              <div class="flex items-center gap-3 text-red-400">
+            <div class="bg-investa-primary/10 border border-investa-primary/20 rounded-xl p-6 backdrop-blur-sm">
+              <div class="flex items-center gap-3 text-investa-primary">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
                 <h3 class="font-semibold">Uh-oh! We hit a snag</h3>
               </div>
-              <p class="mt-3 text-gray-300">We're having some trouble analyzing your idea right now. Our team has been notified and we're working on it. Please try again in a few moments.</p>
+              <p class="mt-3 text-investa-gray">We're having some trouble analyzing your idea right now. Our team has been notified and we're working on it. Please try again in a few moments.</p>
               <div class="mt-4 flex gap-4">
                 <button 
                   onclick="window.location.reload()"
-                  class="text-sm px-4 py-2 rounded-lg bg-red-500/20 text-red-400 hover:bg-red-500/30 transition-colors"
+                  class="text-sm px-4 py-2 rounded-lg bg-investa-primary/20 text-investa-primary hover:bg-investa-primary/30 transition-colors"
                 >
                   Try Again
                 </button>
                 <a 
                   href="/"
-                  class="text-sm px-4 py-2 rounded-lg bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 transition-colors"
+                  class="text-sm px-4 py-2 rounded-lg bg-investa-gray/20 text-investa-gray hover:bg-investa-gray/30 transition-colors"
                 >
                   Go Home
                 </a>
@@ -180,9 +180,9 @@ const Chatbot: React.FC = () => {
         console.error("JSON Parse Error:", parseError);
         console.log("Failed JSON string:", cleanJson);
         return `
-          <div class="bg-red-500/10 border border-red-500 p-4 rounded-lg">
-            <h3 class="text-red-400 font-semibold mb-2">Error Parsing Response</h3>
-            <pre class="text-sm text-gray-300 whitespace-pre-wrap">${content}</pre>
+          <div class="bg-investa-primary/10 border border-investa-primary/20 p-4 rounded-lg">
+            <h3 class="text-investa-primary font-semibold mb-2">Error Parsing Response</h3>
+            <pre class="text-sm text-investa-gray whitespace-pre-wrap">${content}</pre>
           </div>
         `;
       }
@@ -191,12 +191,12 @@ const Chatbot: React.FC = () => {
         <div class="space-y-6">
           <!-- Main Content - Single Column -->
           <section class="transform hover:scale-[1.01] transition-transform duration-200">
-            <div class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-[1px]">
-              <div class="bg-gray-900/60 backdrop-blur-xl rounded-2xl p-6">
-                <h2 class="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+            <div class="bg-gradient-to-r from-investa-primary/10 to-investa-primary/5 rounded-2xl p-[1px]">
+              <div class="bg-white shadow-lg backdrop-blur-xl rounded-2xl p-6">
+                <h2 class="text-2xl font-bold mb-4 text-investa-primary">
                   Problem Statement
                 </h2>
-                <div class="text-gray-200 leading-relaxed">
+                <div class="text-investa-gray leading-relaxed">
                   ${analysisData.problem_statement}
                 </div>
               </div>
@@ -204,18 +204,18 @@ const Chatbot: React.FC = () => {
           </section>
 
           <section class="transform hover:scale-[1.01] transition-transform duration-200">
-            <div class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-[1px]">
-              <div class="bg-gray-900/60 backdrop-blur-xl rounded-2xl p-6">
-                <h2 class="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+            <div class="bg-gradient-to-r from-investa-primary/10 to-investa-primary/5 rounded-2xl p-[1px]">
+              <div class="bg-white shadow-lg backdrop-blur-xl rounded-2xl p-6">
+                <h2 class="text-2xl font-bold mb-4 text-investa-primary">
                   Active Startups
                 </h2>
                 <div class="space-y-4">
                   ${
                     analysisData.market_analysis.startups.length === 0
                       ? `
-                      <div class="bg-gray-800/50 rounded-xl border border-gray-700/50 p-6">
-                        <div class="flex items-center gap-3 text-gray-300">
-                          <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div class="bg-gray-50 rounded-xl border border-gray-100 p-6">
+                        <div class="flex items-center gap-3 text-investa-gray">
+                          <svg class="w-5 h-5 text-investa-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
                           <span>No active startups found in this space.</span>
@@ -225,37 +225,37 @@ const Chatbot: React.FC = () => {
                       : analysisData.market_analysis.startups
                           .map(
                             (startup: Startup, index: number) => `
-                          <div class="bg-gray-800/50 rounded-xl border border-gray-700/50 overflow-hidden" data-startup-index="${index}">
-                            <button class="w-full p-4 text-left flex items-center justify-between cursor-pointer hover:bg-gray-700/30 transition-colors" 
+                          <div class="bg-gray-50 rounded-xl border border-gray-100 overflow-hidden" data-startup-index="${index}">
+                            <button class="w-full p-4 text-left flex items-center justify-between cursor-pointer hover:bg-gray-100 transition-colors" 
                                     onclick="document.dispatchEvent(new CustomEvent('toggleStartup', { detail: ${index} }))">
-                              <h4 class="font-semibold text-blue-300">${
+                              <h4 class="font-semibold text-investa-dark">${
                                 startup.name
                               }</h4>
                               <div class="flex items-center gap-2">
-                                <span class="text-xs px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full border border-blue-500/20">
+                                <span class="text-xs px-3 py-1 bg-investa-primary/10 text-investa-primary rounded-full border border-investa-primary/10">
                                   ${startup.funding_stage}
                                 </span>
-                                <svg class="w-5 h-5 transition-transform startup-arrow text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 transition-transform startup-arrow text-investa-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                                 </svg>
                               </div>
                             </button>
-                            <div class="startup-content hidden p-6 border-t border-gray-700/50 bg-gray-800/30">
+                            <div class="startup-content hidden p-6 border-t border-gray-100 bg-white">
                               <div class="space-y-4">
                                 <div>
-                                  <p class="text-sm text-blue-300 mb-2 font-semibold">Description:</p>
-                                  <p class="text-gray-300">${
+                                  <p class="text-sm text-investa-primary mb-2 font-semibold">Description:</p>
+                                  <p class="text-investa-gray">${
                                     startup.description
                                   }</p>
                                 </div>
                                 <div>
-                                  <p class="text-sm text-blue-300 mb-2 font-semibold">Key Features:</p>
+                                  <p class="text-sm text-investa-primary mb-2 font-semibold">Key Features:</p>
                                   <ul class="grid grid-cols-1 gap-2">
                                     ${startup.features
                                       .map(
                                         (feature) => `
-                                      <li class="flex items-center gap-2 text-gray-300">
-                                        <svg class="w-4 h-4 flex-shrink-0 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <li class="flex items-center gap-2 text-investa-gray">
+                                        <svg class="w-4 h-4 flex-shrink-0 text-investa-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4" />
                                         </svg>
                                         <span class="text-sm md:text-base">${feature}</span>
@@ -268,12 +268,12 @@ const Chatbot: React.FC = () => {
                                 ${
                                   startup.url
                                     ? `
-                                  <div class="border-t border-gray-700/50 pt-4">
-                                    <p class="text-sm text-blue-300 font-semibold mb-2">Website:</p>
+                                  <div class="border-t border-gray-100 pt-4">
+                                    <p class="text-sm text-investa-primary font-semibold mb-2">Website:</p>
                                     <a href="${startup.url}" 
                                        target="_blank" 
                                        rel="noopener noreferrer" 
-                                       class="text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-2">
+                                       class="text-investa-primary hover:text-investa-primary/80 transition-colors inline-flex items-center gap-2">
                                       <span>${startup.url}</span>
                                       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -376,151 +376,131 @@ const Chatbot: React.FC = () => {
   }, [productIdea]);
 
   return (
-    <div className="min-h-screen bg-[#010208] relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#010208] via-[#030412] to-[#05081c] opacity-90" />
-      <div className="absolute inset-0 bg-[url('/stars.png')] opacity-40 animate-twinkle" />
+    <div className="min-h-screen bg-white relative overflow-hidden">
+      {/* Grid Pattern Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-transparent" />
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `linear-gradient(to right, #53505008 1px, transparent 1px), 
+                          linear-gradient(to bottom, #53505008 1px, transparent 1px)`,
+          backgroundSize: "50px 50px",
+          maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0) 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0) 100%)",
+        }}
+      />
 
-      <div className="absolute top-1/4 -left-48 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-blob" />
-      <div className="absolute top-1/3 -right-48 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-blob animation-delay-2000" />
-      <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl animate-blob animation-delay-4000" />
-
-      <div className="absolute top-4 sm:top-8 left-4 sm:left-8">
-        {/* <span className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-          ExistYet
-        </span> */}
-        <Link href="/">
-          <img src="/logo.png" alt="ExistYet" className="w-24 md:w-28" />
-        </Link>
-      </div>
-
-      <div className="max-w-6xl mt-20 md:mt-12 mx-auto px-4 mb-10 md:px-6 relative">
-        <div className="text-center mb-8 md:mb-12 pt-6 sm:pt-12 px-4">
-          <div className="mb-4">
-            <img
-              src="/image.png"
-              alt="Investment Research"
-              className="w-[480px] md:w-[480px] mx-auto object-contain animate-float"
-            />
-          </div>
-          <h1 className="text-2xl sm:text-3xl lg:text-3xl font-bold mb-4">
-            <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 pb-1">
-              Find Investment Opportunities
-            </span>
-          </h1>
-          <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
-            Discover promising startups and market opportunities in your area of interest.
-          </p>
-        </div>
-
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-8 px-2 sm:px-4 md:px-0 max-w-3xl mx-auto -mt-2"
-        >
-          <div className="relative">
-            <Input
-              onChange={(e) => {
-                setProductIdea(e.target.value);
-                setInputError(null); // Clear error when user types
-              }}
-              value={productIdea}
-            />
-            {inputError && (
-              <div className="absolute -bottom-6 left-0 w-full text-center">
-                <span className="text-red-400 text-sm">{inputError}</span>
-              </div>
-            )}
-          </div>
-
-          <div className="flex flex-wrap gap-3 justify-center max-w-2xl mx-auto">
-            {suggestions.map((suggestion, index) => (
-              <button
-                key={index}
-                type="button"
-                onClick={() => handleSuggestionClick(suggestion)}
-                className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm bg-gray-800/50 
-                  border border-gray-700/50 text-blue-200 hover:text-blue-100
-                  hover:bg-gray-700/50 hover:border-blue-500/30
-                  transition-all backdrop-blur-sm
-                  transform hover:scale-105 active:scale-95 duration-200
-                  shadow-lg shadow-blue-500/5"
-              >
-                {suggestion}
+      <div className="relative z-10 px-4 pt-8 pb-16">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-center mb-12">
+            <Link href="/">
+              <div className="font-bold text-3xl text-investa-primary">Renvue</div>
+            </Link>
+            <Link href="/">
+              <button className="h-10 px-8 bg-investa-dark text-white rounded-full hover:bg-opacity-90 transition-all font-medium text-sm flex items-center justify-center shadow-sm hover:shadow-md transform hover:scale-105">
+                Back to Home
               </button>
-            ))}
+            </Link>
           </div>
 
-          <div className="text-center pt-4">
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="relative w-full sm:w-auto bg-gradient-to-r from-blue-500 to-purple-500 text-white 
-                px-10 md:px-14 py-3.5 md:py-4 rounded-full text-lg md:text-xl font-medium
-                hover:from-blue-600 hover:to-purple-600 disabled:opacity-90 disabled:cursor-not-allowed
-                transform transition-all duration-200 hover:scale-105 active:scale-95
-                shadow-[0_0_20px_rgba(66,153,225,0.5)] hover:shadow-[0_0_25px_rgba(66,153,225,0.6)]
-                overflow-hidden"
-            >
-              {isLoading ? (
-                <>
-                  <div className="relative z-10">Researching...</div>
+          <div className="text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold text-investa-dark leading-tight mb-6">
+              Find Investment Opportunities
+            </h1>
+            <p className="text-investa-gray text-lg max-w-3xl mx-auto">
+              Discover promising startups and market opportunities that match your investment criteria.
+            </p>
+          </div>
+
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-8 max-w-3xl mx-auto mb-12"
+          >
+            <div className="relative">
+              <div className="relative">
+                <input
+                  type="text"
+                  value={productIdea}
+                  onChange={(e) => {
+                    setProductIdea(e.target.value);
+                    setInputError(null);
+                  }}
+                  placeholder="Describe the startup or investment sector you're interested in..."
+                  className="w-full h-14 px-5 bg-white rounded-full border-2 border-investa-primary/30 focus:border-investa-primary text-investa-dark text-lg focus:outline-none shadow-lg focus:shadow-investa-primary/20 transition-all"
+                />
+                {!isLoading && (
+                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                    <button
+                      type="submit"
+                      className="h-10 px-6 bg-investa-primary text-white rounded-full hover:bg-opacity-90 font-medium text-sm flex items-center justify-center shadow-sm"
+                    >
+                      Search
+                    </button>
+                  </div>
+                )}
+              </div>
+              {inputError && (
+                <div className="absolute -bottom-6 left-0 w-full text-center">
+                  <span className="text-investa-primary text-sm">{inputError}</span>
+                </div>
+              )}
+            </div>
+
+            <div className="flex flex-wrap gap-3 justify-center">
+              {suggestions.map((suggestion, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => handleSuggestionClick(suggestion)}
+                  className="px-5 py-2.5 rounded-full text-sm bg-white border border-investa-gray/30 text-investa-gray hover:text-investa-primary hover:border-investa-primary/30 transition-all transform hover:scale-105 active:scale-95 duration-200 shadow-sm"
+                >
+                  {suggestion}
+                </button>
+              ))}
+            </div>
+
+            {isLoading && (
+              <div className="text-center">
+                <div className="relative h-2 w-full max-w-md mx-auto bg-gray-200 rounded-full overflow-hidden">
                   <div
-                    className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600"
+                    className="absolute top-0 left-0 h-full bg-investa-primary rounded-full"
                     style={{
                       width: `${loadingProgress}%`,
                       transition: "width 0.5s ease-out",
                     }}
                   />
-                  <div
-                    className="absolute inset-0 opacity-20"
-                    style={{
-                      background:
-                        "linear-gradient(90deg, transparent, rgba(169, 199, 255, 0.8), transparent)",
-                      transform: "translateX(-50%)",
-                      animation: "shimmer 1.5s infinite",
-                      width: "50%",
-                      zIndex: 1,
-                    }}
-                  />
-                </>
-              ) : (
-                "Find Startups"
-              )}
-            </button>
-          </div>
-        </form>
-
-        {response && (
-          <div
-            ref={resultsRef}
-            className="mt-12 sm:mt-16 animate-fadeIn px-2 sm:px-4 md:px-0"
-          >
-            <div className="relative">
-              <div className="bg-gray-800/50 backdrop-blur-xl rounded-2xl border border-gray-700/50 shadow-xl">
-                <div className="p-6 sm:p-8 md:p-10">
-                  <div
-                    className="text-white prose prose-invert max-w-none prose-lg"
-                    dangerouslySetInnerHTML={{ __html: response.content }}
-                  />
-                  {response.citations && (
-                    <div className="mt-10 border-t border-gray-700/50 pt-8">
-                      <h3 className="text-2xl font-semibold text-blue-400 mb-6">
-                        Citations
-                      </h3>
-                      <ul className="space-y-3">
-                        {response.citations.map((citation, index) => (
-                          <li key={index} className="flex gap-4 text-gray-300">
-                            <span className="text-blue-400 text-xl">•</span>
-                            {citation}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
                 </div>
+                <p className="mt-3 text-investa-gray">Researching investment opportunities...</p>
+              </div>
+            )}
+          </form>
+
+          {response && (
+            <div
+              ref={resultsRef}
+              className="animate-fadeIn"
+            >
+              <div className="relative max-w-4xl mx-auto">
+                <div dangerouslySetInnerHTML={{ __html: response.content }} />
+                {response.citations && (
+                  <div className="mt-10 border-t border-gray-200 pt-8">
+                    <h3 className="text-xl font-semibold text-investa-primary mb-6">
+                      Sources
+                    </h3>
+                    <ul className="space-y-3">
+                      {response.citations.map((citation, index) => (
+                        <li key={index} className="flex gap-4 text-investa-gray">
+                          <span className="text-investa-primary text-xl">•</span>
+                          {citation}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
