@@ -46,6 +46,7 @@ const Chatbot: React.FC = () => {
   );
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [inputError, setInputError] = useState<string | null>(null);
+  const [selectedSuggestion, setSelectedSuggestion] = useState<string | null>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
 
   const suggestions = [
@@ -325,7 +326,7 @@ const Chatbot: React.FC = () => {
                                        class="flex items-center gap-2 text-investa-primary hover:text-investa-primary/80 transition-colors p-4 bg-white rounded-lg border border-gray-100 hover:border-investa-primary/20 hover:shadow-md">
                                       <span class="text-sm truncate">${startup.url}</span>
                                       <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                        <path stroke-linecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                       </svg>
                                     </a>
                                   </div>
@@ -404,7 +405,16 @@ const Chatbot: React.FC = () => {
 
   // Add this function to handle suggestion clicks
   const handleSuggestionClick = (suggestion: string) => {
+    setSelectedSuggestion(suggestion);
     setProductIdea(suggestion);
+    
+    // Automatically submit the form after setting the suggestion
+    setTimeout(() => {
+      // Create a new form submit event and dispatch it
+      const submitEvent = new Event('submit', { bubbles: true, cancelable: true });
+      document.querySelector('form')?.dispatchEvent(submitEvent);
+      setSelectedSuggestion(null); // Reset after submission
+    }, 300); // Slightly longer timeout for visual feedback
   };
 
   // Add cleanup when component unmounts
@@ -579,9 +589,21 @@ const Chatbot: React.FC = () => {
                       key={index}
                       type="button"
                       onClick={() => handleSuggestionClick(suggestion)}
-                      className="px-5 py-2.5 rounded-full text-sm bg-white border border-investa-gray/30 text-investa-gray hover:text-investa-primary hover:border-investa-primary/30 hover:bg-investa-primary/5 transition-all transform hover:scale-105 active:scale-95 duration-200 shadow-sm"
+                      disabled={isLoading || selectedSuggestion !== null}
+                      className={`px-5 py-2.5 rounded-full text-sm border transition-all transform hover:scale-105 active:scale-95 duration-200 shadow-sm ${
+                        productIdea === suggestion && selectedSuggestion === suggestion
+                          ? "bg-investa-primary/20 text-investa-primary border-investa-primary/40 font-medium relative overflow-hidden"
+                          : productIdea === suggestion
+                          ? "bg-investa-primary/10 text-investa-primary border-investa-primary/30 font-medium" 
+                          : "bg-white border-investa-gray/30 text-investa-gray hover:text-investa-primary hover:border-investa-primary/30 hover:bg-investa-primary/5"
+                      } ${selectedSuggestion === suggestion ? "cursor-wait" : "cursor-pointer"}`}
                     >
                       {suggestion}
+                      {selectedSuggestion === suggestion && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-investa-primary/5">
+                          <div className="h-4 w-4 rounded-full border-2 border-investa-primary/30 border-t-investa-primary animate-spin"></div>
+                        </div>
+                      )}
                     </button>
                   ))}
                 </div>

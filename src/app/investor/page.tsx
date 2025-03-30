@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import './style.css';
 import SignupModal from "@/components/SignupModal";
+import Link from "next/link";
 
 export default function InvestorPage() {
   const [signUpModalOpen, setSignUpModalOpen] = useState(false);
@@ -30,7 +31,21 @@ export default function InvestorPage() {
         {/* Desktop Sidebar */}
         <div className="desktop_side_bar">
           <div className="side_bar_new">
-            <h2>Renvue AI</h2>
+            <Link href="/" className="no-underline">
+              <h2 className="font-bold text-[#f13505] text-2xl transition-transform hover:scale-105" 
+                style={{ 
+                  cursor: 'pointer',
+                  textDecoration: 'none',
+                  transition: 'all 0.2s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >Renvue AI</h2>
+            </Link>
             <nav className="side_bar_navigation">
               <div onClick={openSignUpModal} className="side_bar_item home">
                 <h4>Home</h4>
@@ -108,12 +123,22 @@ export default function InvestorPage() {
             </div>
             <div className="side_bar_new">
               <div className="nav-bar-logo_desktop">
-                <Image 
-                  src="https://cdn.prod.website-files.com/645ce56c63c3364f2fcc8080/65c21ddc9343ae771808937b_Logo.svg" 
-                  alt="Logo" 
-                  width={100} 
-                  height={30} 
-                />
+                <Link href="/">
+                  <div className="font-bold text-[#f13505] text-2xl"
+                    style={{ 
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0)";
+                    }}
+                  >
+                    Renvue
+                  </div>
+                </Link>
               </div>
               <nav className="side_bar_navigation">
                 <div onClick={openSignUpModal} className="side_bar_item home">
@@ -155,12 +180,22 @@ export default function InvestorPage() {
             </div>
           </div>
           <div className="horizontal_block layout_justify_stretch">
-            <Image 
-              src="https://cdn.prod.website-files.com/645ce56c63c3364f2fcc8080/65c21ddc9343ae771808937b_Logo.svg" 
-              alt="Logo" 
-              width={100} 
-              height={30} 
-            />
+            <Link href="/">
+              <div className="font-bold text-[#f13505] text-2xl"
+                style={{ 
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                Renvue
+              </div>
+            </Link>
             <div className="horizontal_block gap_8">
               <h4>Menu</h4>
               <Image 
@@ -195,7 +230,8 @@ export default function InvestorPage() {
                 width={24} 
                 height={24} 
               />
-              <h4 className="black">Back</h4>
+              
+              <Link href="/find-investors"><h4 className="black">Back</h4></Link>
             </div>
             <div className="horizontal_block">
               <div className="hidden_block" style={{ display: "block" }}>
@@ -215,6 +251,50 @@ export default function InvestorPage() {
                   <div>Add to list</div>
                 </div>
               </div>
+              <Link href="/" className="ml-4">
+                <button
+                  className="primary_button"
+                  style={{
+                    backgroundColor: "#f13505",
+                    color: "white",
+                    borderRadius: "999px",
+                    padding: "10px 16px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    fontSize: "14px",
+                    boxShadow: "0 4px 6px rgba(241, 53, 5, 0.2)",
+                    border: "none",
+                    transition: "all 0.2s ease"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "translateY(-2px)";
+                    e.currentTarget.style.boxShadow = "0 6px 10px rgba(241, 53, 5, 0.3)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "0 4px 6px rgba(241, 53, 5, 0.2)";
+                  }}
+                >
+                  <svg 
+                    width="18" 
+                    height="18" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    xmlns="http://www.w3.org/2000/svg"
+                    style={{ flexShrink: 0 }}
+                  >
+                    <path 
+                      d="M3 12h18M3 12l6-6M3 12l6 6" 
+                      stroke="currentColor" 
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  Back to Home
+                </button>
+              </Link>
             </div>
           </div>
           

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import './style.css';
 
 // Define investor type
@@ -288,6 +289,73 @@ export default function FindInvestors() {
   return (
     <div className="main_data_block">
       <div className="section_780">
+        {/* Back to Home Link */}
+        <div className="horizontal_block layout_justify_stretch mb-6">
+          <Link href="/">
+            <div className="font-bold text-3xl" style={{ color: "#f13505", transition: "all 0.2s ease" }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
+              Renvue
+            </div>
+          </Link>
+          <Link href="/">
+            <button
+              className="secondary_button"
+              style={{
+                backgroundColor: "#040404",
+                color: "white",
+                borderRadius: "999px",
+                padding: "8px 16px",
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                fontSize: "14px",
+                border: "none",
+                transition: "all 0.2s ease"
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.1)";
+              }}
+            >
+              <svg 
+                width="16" 
+                height="16" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ marginRight: "4px" }}
+              >
+                <path 
+                  d="M3 12h18M3 12l6-6M3 12l6 6" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                />
+              </svg>
+              Back to Home
+            </button>
+          </Link>
+        </div>
+
+        {/* Title Section */}
+        <div className="section_block" style={{ textAlign: "center", marginBottom: "2rem" }}>
+          <h1 style={{ fontSize: "2rem", fontWeight: "bold", marginBottom: "1rem", color: "#040404" }}>Find Investors</h1>
+          <p style={{ color: "#535050", maxWidth: "540px", margin: "0 auto" }}>
+            Connect with investors that match your startup's industry, stage, and funding needs.
+          </p>
+        </div>
+
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
