@@ -3,6 +3,7 @@ import OpenAI from "openai";
 import { appendToSheet } from "@/utils/googleSheets";
 import { headers } from 'next/headers';
 import { searchGitHub } from "@/utils/githubSearch";
+import { getProductHuntPosts } from "@/utils/productHunt";  // Import your scraping function
 
 // Change runtime to nodejs
 export const runtime = 'nodejs';
@@ -15,7 +16,7 @@ const client = new OpenAI({
 });
 
 const systemPrompt = `You are an investment research assistant. Analyze the provided problem or product idea and return a JSON response.
-IMPORTANT: Your response must be ONLY valid JSON with NO markdown, NO code blocks, and NO additional text.
+IMPORTANT: Your response must be ONLY valid JSON with NO markdown, NO code blocks, and NO additional text. If it contains source details in its title/name then you must have the same in your response structure startup name.
 
 For startups/products:
 - Only include companies/products that are actively operating in the market and are less than 10 years old valued at less than 1 billion USD
@@ -35,7 +36,7 @@ The response must exactly match this structure:
       "overview": "string summarizing market analysis",
       "startups": [
         {
-          "name": "string",
+          "name": "string (source name if from product hunt)",
           "description": "string",
           "features": ["string"],
           "funding_stage": "string (e.g., 'Seed', 'Series A', 'Series B', etc.)",
@@ -77,11 +78,15 @@ export async function POST(request: Request) {
 
     console.log("Analyzing product idea:", productIdea);
 
+    // Fetch the product posts from Product Hunt
+    const productHuntPosts = await getProductHuntPosts();
+    console.log("Fetched Product Hunt Posts:", productHuntPosts);
+
     // Perform GitHub search in parallel with AI analysis
     const githubSearchPromise = searchGitHub(productIdea);
 
     try {
-      const [response, githubResults] = await Promise.all([
+      const [response, githubResults] = await Promise.all([ 
         client.chat.completions.create({
           model: "llama-3.1-sonar-large-128k-online",
           messages: [
@@ -91,8 +96,8 @@ export async function POST(request: Request) {
             },
             {
               role: "user",
-              content: productIdea,
-            },
+              content: productIdea + `Here are some recent posts from Product Hunt that could be relevant for this idea: ${JSON.stringify(productHuntPosts)}`,
+            }
           ],
           temperature: 0.7,
           max_tokens: 2000,
@@ -149,7 +154,7 @@ export async function POST(request: Request) {
         }, { headers: responseHeaders });
       } catch (parseError) {
         console.error("JSON Parse Error:", parseError);
-        console.error("Failed   content:", cleanContent);
+        console.error("Failed content:", cleanContent);
         return NextResponse.json(
           {
             error: "Failed to parse API response as JSON",
