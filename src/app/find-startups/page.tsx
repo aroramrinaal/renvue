@@ -51,8 +51,9 @@ const Chatbot: React.FC = () => {
 
   const suggestions = [
     "Platform to manage all your subscriptions",
-    "AI-powered productivity tools",
-    "Remote work collaboration tools",
+    "Linkedin Alternative",
+    "An analytics app for discord research",
+    "AI Beauty Analysis"
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -734,7 +735,7 @@ const Chatbot: React.FC = () => {
           
           {/* Footer - Always visible */}
           <div className={`mt-20 text-center text-investa-gray/70 text-sm ${response ? 'pt-12 border-t border-gray-100' : ''}`}>
-            <p>© 2023 Renvue. All investment data is simulated for demonstration purposes only.</p>
+            <p>© 2025 Renvue. All investment data is simulated for demonstration purposes only.</p>
           </div>
         </div>
       </div>
