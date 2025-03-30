@@ -51,9 +51,9 @@ const Chatbot: React.FC = () => {
 
   const suggestions = [
     "Platform to manage all your subscriptions",
-    "AI-powered productivity tools",
-    "Remote work collaboration tools",
-    "An analytics app for discord research"
+    "Linkedin Alternative",
+    "An analytics app for discord research",
+    "AI Beauty Analysis"
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
