@@ -483,7 +483,7 @@ const Chatbot: React.FC = () => {
                   />
                 </>
               ) : (
-                "Research Opportunities"
+                "Find Startups"
               )}
             </button>
           </div>
