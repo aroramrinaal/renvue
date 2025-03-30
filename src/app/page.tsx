@@ -92,7 +92,7 @@ export default function Home() {
               </div>
             </div>
             <Link href="/get-started" className="relative z-20">
-              <button className="h-10 px-8 border border-gray-300 text-black hover:bg-gray-50 transition-all font-medium text-sm flex items-center justify-center">
+              <button className="h-10 px-8 bg-investa-dark text-white rounded-full hover:bg-opacity-90 transition-all font-medium text-sm flex items-center justify-center shadow-sm hover:shadow-md transform hover:scale-105">
                 Sign In
               </button>
             </Link>
