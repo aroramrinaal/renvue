@@ -33,7 +33,7 @@ const INVESTORS: Investor[] = [
     id: 1,
     name: "Kyle Kallman",
     company: "Charge Ventures",
-    image: "https://xubs-akpz-sxip.n7.xano.io/vault/JXk4kDws/Lj90k7iYTEkMgvBacQq7SxO47_g/nfcJrg../1516246005879.jpeg",
+    image: "/investors/investor6.jpg",
     focus: ["SaaS", "AI", "Fintech", "Healthcare", "Real Estate"],
     stage: ["Pre-seed", "Seed", "Series A"],
     ticketSize: "$500K - $2M",
@@ -51,7 +51,7 @@ const INVESTORS: Investor[] = [
     id: 2,
     name: "Sarah Johnson",
     company: "Sequoia Capital",
-    image: "",
+    image: "/investors/investor2.jpg",
     focus: ["Healthcare", "Biotech", "AI"],
     stage: ["Seed", "Series A", "Series B"],
     ticketSize: "$1M - $5M",
@@ -69,7 +69,7 @@ const INVESTORS: Investor[] = [
     id: 3,
     name: "Michael Rodriguez",
     company: "First Round Capital",
-    image: "",
+    image: "/investors/investor4.jpg",
     focus: ["E-commerce", "Consumer", "Marketplace"],
     stage: ["Pre-seed", "Seed"],
     ticketSize: "$250K - $1M",
@@ -87,7 +87,7 @@ const INVESTORS: Investor[] = [
     id: 4,
     name: "Emily Wong",
     company: "Andreessen Horowitz",
-    image: "",
+    image: "/investors/investor5.jpg",
     focus: ["Crypto", "Web3", "Fintech"],
     stage: ["Seed", "Series A", "Series B"],
     ticketSize: "$2M - $10M",
@@ -105,7 +105,7 @@ const INVESTORS: Investor[] = [
     id: 5,
     name: "David Patel",
     company: "Lightspeed Ventures",
-    image: "",
+    image: "/investors/investor7.jpg",
     focus: ["Enterprise", "SaaS", "Security"],
     stage: ["Series A", "Series B"],
     ticketSize: "$5M - $15M",
@@ -123,7 +123,7 @@ const INVESTORS: Investor[] = [
     id: 6,
     name: "Lisa Brown",
     company: "Y Combinator",
-    image: "/investors/lisa-brown.jpg",
+    image: "/investors/investor.jpg",
     focus: ["AI", "Developer Tools", "Productivity"],
     stage: ["Pre-seed", "Seed"],
     ticketSize: "$125K - $500K",
@@ -141,7 +141,7 @@ const INVESTORS: Investor[] = [
     id: 7,
     name: "Mark Williams",
     company: "SV Angel",
-    image: "/investors/mark-williams.jpg",
+    image: "/investors/investor6.jpg",
     focus: ["Healthcare", "Climate", "Deep Tech"],
     stage: ["Seed", "Series A"],
     ticketSize: "$750K - $3M",
@@ -703,21 +703,35 @@ export default function FindInvestors() {
                   }}
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
-                    <div>
-                      {investor.image.startsWith('http') ? (
+                    <div style={{ 
+                      width: "80px", 
+                      height: "80px", 
+                      borderRadius: "50%",
+                      overflow: "hidden",
+                      flexShrink: 0,
+                      border: "3px solid #f13505",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      boxSizing: "border-box"
+                    }}>
+                      {investor.image ? (
                         <Image 
                           src={investor.image}
                           alt={investor.name}
                           width={80}
                           height={80}
-                          style={{ borderRadius: "50%", objectFit: "cover", border: "3px solid #f13505" }}
+                          style={{ 
+                            objectFit: "cover", 
+                            width: "100%", 
+                            height: "100%" 
+                          }}
                         />
                       ) : (
                         <div 
                           style={{ 
-                            width: "80px", 
-                            height: "80px", 
-                            borderRadius: "50%", 
+                            width: "100%", 
+                            height: "100%", 
                             background: investor.name.length % 5 === 0 ? "#f13505" : 
                                       investor.name.length % 5 === 1 ? "#ff6e50" :
                                       investor.name.length % 5 === 2 ? "#ff9c85" :
@@ -818,8 +832,8 @@ export default function FindInvestors() {
                   </div>
 
                   <div style={{ marginTop: "1.5rem", display: "flex", justifyContent: "center" }}>
-                    <a 
-                      href="/investor" 
+                    <Link 
+                      href={`/investors/${investor.id}`}
                       style={{ 
                         padding: "0.75rem 1.5rem", 
                         background: "#f13505", 
@@ -840,7 +854,7 @@ export default function FindInvestors() {
                         <path d="M5 12H19" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                         <path d="M12 5L19 12L12 19" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
-                    </a>
+                    </Link>
                   </div>
                 </motion.div>
               ))}
