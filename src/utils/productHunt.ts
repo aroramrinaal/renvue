@@ -117,33 +117,48 @@ const getPostID = async (link: string): Promise<string> => {
 
 // Main function to scrape and return data
 export const getProductHuntPosts = async (): Promise<PostData[]> => {
-  const firstPostLink = await getFirstPostLink();
-  let postId = await getPostID(firstPostLink);
+  try {
+    const firstPostLink = await getFirstPostLink();
+    if (!firstPostLink) {
+      console.log('Error: Could not fetch the first post link');
+      return [];
+    }
+    
+    let postId = await getPostID(firstPostLink);
 
-  if (!postId) {
-    console.log('Error: Invalid postId fetched');
-    return []; // If postId is invalid, return an empty array
-  }
-
-  let posts: PostData[] = [];
-
-  // Scrape the posts
-  for (let i = 0; i < TOTALPOSTSTOGET; i++) {
-    // Check if postId is valid before scraping
-    if (!postId || isNaN(Number(postId))) {
-      console.log(`Skipping invalid postId: ${postId}`);
-      break;  // Break or continue, depending on your logic
+    if (!postId) {
+      console.log('Error: Invalid postId fetched');
+      return []; // If postId is invalid, return an empty array
     }
 
-    const postData = await scrapPostContent(postId);
-    if (postData) {
-      posts.push(postData);
+    let posts: PostData[] = [];
+
+    // Scrape the posts
+    for (let i = 0; i < TOTALPOSTSTOGET; i++) {
+      // Check if postId is valid before scraping
+      if (!postId || isNaN(Number(postId))) {
+        console.log(`Skipping invalid postId: ${postId}`);
+        break;  // Break or continue, depending on your logic
+      }
+
+      try {
+        const postData = await scrapPostContent(postId);
+        if (postData) {
+          posts.push(postData);
+        }
+        postId = (parseInt(postId) - 1).toString();
+
+        // Delay to avoid overloading server
+        await new Promise(resolve => setTimeout(resolve, 500)); // Increased delay to 500ms
+      } catch (error) {
+        console.log(`Error processing post ID ${postId}:`, error);
+        postId = (parseInt(postId) - 1).toString();
+      }
     }
-    postId = (parseInt(postId) - 1).toString();
 
-    // Delay to avoid overloading server
-    await new Promise(resolve => setTimeout(resolve, 200));
+    return posts;
+  } catch (error) {
+    console.error('Error in getProductHuntPosts:', error);
+    return [];
   }
-
-  return posts;
 };

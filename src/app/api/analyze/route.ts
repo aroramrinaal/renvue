@@ -79,8 +79,13 @@ export async function POST(request: Request) {
     console.log("Analyzing product idea:", productIdea);
 
     // Fetch the product posts from Product Hunt
-    const productHuntPosts = await getProductHuntPosts();
-    console.log("Fetched Product Hunt Posts:", productHuntPosts);
+    let productHuntPosts: any[] = [];
+    try {
+      productHuntPosts = await getProductHuntPosts();
+      console.log("Fetched Product Hunt Posts:", productHuntPosts);
+    } catch (error) {
+      console.log("Failed to fetch Product Hunt posts, continuing without them:", error);
+    }
 
     // Perform GitHub search in parallel with AI analysis
     const githubSearchPromise = searchGitHub(productIdea);
