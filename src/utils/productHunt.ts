@@ -20,7 +20,15 @@ let TRACK404 = 0; // Not to be modified
 // Function to parse HTML
 const parseHTML = async (url: string): Promise<CheerioAPI | null> => {
   try {
-    const { data } = await axios.get(url);
+    const { data } = await axios.get(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Referer': 'https://www.google.com/'
+      },
+      timeout: 10000 // 10 second timeout
+    });
     return cheerio.load(data);
   } catch (error) {
     console.error(`Error fetching URL: ${url}`, error);
