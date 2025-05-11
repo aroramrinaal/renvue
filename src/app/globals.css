@@ -170,3 +170,17 @@ body {
 .animate-dash {
   animation: dash 1s linear infinite;
 }
+
+/* Added Float Animation for Company Logos */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px); /* Adjust Y value for more/less float height */
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite; /* Adjust duration and timing function as needed */
+}

@@ -12,7 +12,8 @@ interface CompanyLogo {
 
 export default function GlobeComponent() {
   const globeRef = useRef<HTMLDivElement>(null)
-  const dotsContainerRef = useRef<HTMLDivElement>(null); // Ref for the dots' container
+  const dotsContainerRef = useRef<HTMLDivElement>(null);
+  const logosContainerRef = useRef<HTMLDivElement>(null); // Ref for the logos' container
 
   // Company logos with positions - all positioned in top half of globe
   const companyLogos: CompanyLogo[] = [
@@ -31,6 +32,16 @@ export default function GlobeComponent() {
       const dots = dotsContainerRef.current.querySelectorAll('.glowing-dot');
       dots.forEach(dot => {
         (dot as HTMLElement).style.animationDelay = `${Math.random() * 2}s`;
+      });
+    }
+
+    // Apply float animation and random delay to logos client-side
+    if (logosContainerRef.current) {
+      const logos = logosContainerRef.current.querySelectorAll('.company-logo-item');
+      logos.forEach(logo => {
+        const htmlLogo = logo as HTMLElement;
+        htmlLogo.classList.add('animate-float'); // Add the animation class
+        htmlLogo.style.animationDelay = `${Math.random() * 3}s`; // Random delay up to 3s for variety
       });
     }
   }, []); // Empty dependency array ensures this runs once on mount
@@ -69,36 +80,38 @@ export default function GlobeComponent() {
             }}
           ></div>
 
-          {/* Company Logos */}
-          {companyLogos.map((logo) => (
-            <div
-              key={logo.id}
-              className="absolute flex items-center justify-center bg-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-125 transition-all duration-300 group -mt-8 -ml-4"
-              style={{
-                left: `${logo.position.x}%`,
-                top: `${logo.position.y}%`,
-                width: `${logo.size}px`,
-                height: `${logo.size}px`,
-                zIndex: 10,
-                border: "2px solid rgba(255, 255, 255, 0.9)",
-                boxShadow: "0 5px 15px rgba(0, 0, 0, 0.08)"
-              }}
-            >
-              <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden p-2">
-                <Image
-                  src={logo.image}
-                  alt={logo.name}
-                  width={logo.size * 1.5}
-                  height={logo.size * 1.5}
-                  className="object-contain w-full h-full"
-                  priority
-                />
+          {/* Company Logos wrapped in a new div for ref */}
+          <div ref={logosContainerRef}>
+            {companyLogos.map((logo) => (
+              <div
+                key={logo.id}
+                className="absolute flex items-center justify-center bg-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-125 transition-all duration-300 group -mt-8 -ml-4 company-logo-item" // Added 'company-logo-item' class
+                style={{
+                  left: `${logo.position.x}%`,
+                  top: `${logo.position.y}%`,
+                  width: `${logo.size}px`,
+                  height: `${logo.size}px`,
+                  zIndex: 10,
+                  border: "2px solid rgba(255, 255, 255, 0.9)",
+                  boxShadow: "0 5px 15px rgba(0, 0, 0, 0.08)"
+                }}
+              >
+                <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden p-2">
+                  <Image
+                    src={logo.image}
+                    alt={logo.name}
+                    width={logo.size * 1.5}
+                    height={logo.size * 1.5}
+                    className="object-contain w-full h-full"
+                    priority
+                  />
+                </div>
+                <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs rounded-md px-2 py-1 pointer-events-none whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  {logo.name}
+                </div>
               </div>
-              <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs rounded-md px-2 py-1 pointer-events-none whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                {logo.name}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
 
           {/* Glowing Dots - Focused more in the top half */}
           <div ref={dotsContainerRef}>
