@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 @layer utilities {
-  .animate-twinkle {
-    animation: twinkle 8s ease-in-out infinite;
-  }
-
   .animate-fadeIn {
     animation: fadeIn 0.6s ease-out forwards;
   }
@@ -14,14 +10,9 @@
   .animate-blob {
     animation: blob 7s infinite;
   }
-}
 
-@keyframes twinkle {
-  0%, 100% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 0.3;
+  .text-balance {
+    text-wrap: balance;
   }
 }
 
@@ -159,4 +150,23 @@ body {
 .animate-fadeInDown {
   animation: fadeInDown 0.4s ease-out 0.3s forwards;
   opacity: 0;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+.animate-twinkle {
+  animation: twinkle 2s infinite ease-in-out;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -20; /* Adjust this value to control speed and pattern repetition */
+  }
+}
+
+.animate-dash {
+  animation: dash 1s linear infinite;
 }

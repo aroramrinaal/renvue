@@ -12,6 +12,7 @@ interface CompanyLogo {
 
 export default function GlobeComponent() {
   const globeRef = useRef<HTMLDivElement>(null)
+  const dotsContainerRef = useRef<HTMLDivElement>(null); // Ref for the dots' container
 
   // Company logos with positions - all positioned in top half of globe
   const companyLogos: CompanyLogo[] = [
@@ -23,6 +24,16 @@ export default function GlobeComponent() {
     { id: 6, name: "Product Hunt", position: { x: 50, y: 10 }, size: 55, image: "/companies/ph.png" },
     { id: 7, name: "Acquire", position: { x: 40, y: 40 }, size: 55, image: "/companies/acquire.jpg" },
   ]
+
+  useEffect(() => {
+    // Apply random animation delay to dots only on the client-side after mount
+    if (dotsContainerRef.current) {
+      const dots = dotsContainerRef.current.querySelectorAll('.glowing-dot');
+      dots.forEach(dot => {
+        (dot as HTMLElement).style.animationDelay = `${Math.random() * 2}s`;
+      });
+    }
+  }, []); // Empty dependency array ensures this runs once on mount
 
   return (
     <div className="relative w-full h-[450px] overflow-visible">
@@ -90,47 +101,51 @@ export default function GlobeComponent() {
           ))}
 
           {/* Glowing Dots - Focused more in the top half */}
-          {[
-            { left: "21%", top: "21%", width: "4.5px", height: "3.2px", opacity: 0.5 },
-            { left: "81%", top: "27%", width: "3.2px", height: "6px", opacity: 0.6 },
-            { left: "51%", top: "20%", width: "2.8px", height: "2.5px", opacity: 0.5 },
-            { left: "80%", top: "23%", width: "5.3px", height: "3.8px", opacity: 0.5 },
-            { left: "32%", top: "29%", width: "5.2px", height: "4.9px", opacity: 0.55 },
-            { left: "12%", top: "25%", width: "3.8px", height: "3.5px", opacity: 0.45 },
-            { left: "45%", top: "12%", width: "4.2px", height: "4.5px", opacity: 0.6 },
-            { left: "67%", top: "30%", width: "3.9px", height: "3.6px", opacity: 0.5 },
-            { left: "37%", top: "17%", width: "4.6px", height: "4.1px", opacity: 0.55 },
-            { left: "75%", top: "17%", width: "4.1px", height: "3.7px", opacity: 0.5 },
-            { left: "25%", top: "27%", width: "3.5px", height: "3.9px", opacity: 0.45 },
-            { left: "58%", top: "22%", width: "4.3px", height: "4.8px", opacity: 0.55 },
-            { left: "19%", top: "14%", width: "3.4px", height: "3.3px", opacity: 0.45 },
-            { left: "84%", top: "12%", width: "4.7px", height: "4.3px", opacity: 0.5 },
-            { left: "42%", top: "32%", width: "3.6px", height: "3.8px", opacity: 0.45 },
-            { left: "62%", top: "22%", width: "4.4px", height: "4.2px", opacity: 0.55 },
-            { left: "29%", top: "14%", width: "4.0px", height: "4.0px", opacity: 0.45 },
-            { left: "70%", top: "19%", width: "3.7px", height: "4.6px", opacity: 0.55 },
-            { left: "15%", top: "21%", width: "4.5px", height: "4.4px", opacity: 0.5 },
-            { left: "90%", top: "26%", width: "3.3px", height: "3.1px", opacity: 0.45 }
-          ].map((dot, i) => (
-            <div
-              key={i}
-              className="absolute rounded-full bg-investa-primary"
-              style={{
-                left: dot.left,
-                top: dot.top,
-                width: dot.width,
-                height: dot.height,
-                opacity: dot.opacity,
-                boxShadow: "0 0 8px rgba(241, 53, 5, 0.8)"
-              }}
-            ></div>
-          ))}
+          <div ref={dotsContainerRef}>
+            {[
+              { left: "21%", top: "21%", width: "4.5px", height: "3.2px", opacity: 0.5 },
+              { left: "81%", top: "27%", width: "3.2px", height: "6px", opacity: 0.6 },
+              { left: "51%", top: "20%", width: "2.8px", height: "2.5px", opacity: 0.5 },
+              { left: "80%", top: "23%", width: "5.3px", height: "3.8px", opacity: 0.5 },
+              { left: "32%", top: "29%", width: "5.2px", height: "4.9px", opacity: 0.55 },
+              { left: "12%", top: "25%", width: "3.8px", height: "3.5px", opacity: 0.45 },
+              { left: "45%", top: "12%", width: "4.2px", height: "4.5px", opacity: 0.6 },
+              { left: "67%", top: "30%", width: "3.9px", height: "3.6px", opacity: 0.5 },
+              { left: "37%", top: "17%", width: "4.6px", height: "4.1px", opacity: 0.55 },
+              { left: "75%", top: "17%", width: "4.1px", height: "3.7px", opacity: 0.5 },
+              { left: "25%", top: "27%", width: "3.5px", height: "3.9px", opacity: 0.45 },
+              { left: "58%", top: "22%", width: "4.3px", height: "4.8px", opacity: 0.55 },
+              { left: "19%", top: "14%", width: "3.4px", height: "3.3px", opacity: 0.45 },
+              { left: "84%", top: "12%", width: "4.7px", height: "4.3px", opacity: 0.5 },
+              { left: "42%", top: "32%", width: "3.6px", height: "3.8px", opacity: 0.45 },
+              { left: "62%", top: "22%", width: "4.4px", height: "4.2px", opacity: 0.55 },
+              { left: "29%", top: "14%", width: "4.0px", height: "4.0px", opacity: 0.45 },
+              { left: "70%", top: "19%", width: "3.7px", height: "4.6px", opacity: 0.55 },
+              { left: "15%", top: "21%", width: "4.5px", height: "4.4px", opacity: 0.5 },
+              { left: "90%", top: "26%", width: "3.3px", height: "3.1px", opacity: 0.45 }
+            ].map((dot, i) => (
+              <div
+                key={i}
+                className="absolute rounded-full bg-investa-primary animate-twinkle glowing-dot" // Added 'glowing-dot' class
+                style={{
+                  left: dot.left,
+                  top: dot.top,
+                  width: dot.width,
+                  height: dot.height,
+                  opacity: dot.opacity, // Initial opacity
+                  boxShadow: "0 0 8px rgba(241, 53, 5, 0.8)",
+                  // animationDelay is now set in useEffect
+                }}
+              ></div>
+            ))}
+          </div>
+          {/* End of Dots container */}
 
           {/* Connection Lines */}
           <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 5 }}>
             {companyLogos.map((logo, i) => {
               // Connect each logo to all other logos
-              return companyLogos.filter((_,j) => j !== i).map((otherLogo, j) => {
+              return companyLogos.filter((_,j) => j !== i).map((otherLogo, k) => { // Changed j to k to avoid conflict with outer scope
                 const startX = logo.position.x;
                 const startY = logo.position.y;
                 const endX = otherLogo.position.x;
@@ -138,7 +153,7 @@ export default function GlobeComponent() {
                 
                 return (
                   <line
-                    key={`line-${i}-${j}`}
+                    key={`line-${i}-${k}`}
                     x1={`${startX}%`}
                     y1={`${startY}%`}
                     x2={`${endX}%`}
@@ -146,6 +161,7 @@ export default function GlobeComponent() {
                     stroke="rgba(241, 53, 5, 0.2)"
                     strokeWidth="1"
                     strokeDasharray="5,5"
+                    className="animate-dash"
                   />
                 );
               });
@@ -165,3 +181,27 @@ export default function GlobeComponent() {
   )
 }
 
+// It's good practice to define keyframes in a global CSS file or a style tag if not using Tailwind's JIT for arbitrary values easily.
+// For this example, assuming Tailwind is set up for JIT or these are added to global CSS:
+// In your global.css or a <style jsx global>{` ... `}</style> tag if preferred:
+/*
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+.animate-twinkle {
+  animation: twinkle 2s infinite ease-in-out;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -20; // Adjust this value to control speed and pattern repetition
+  }
+}
+.animate-dash {
+  animation: dash 1s linear infinite;
+}
+*/
+
+// If you are using Tailwind CSS and have configured custom animations in tailwind.config.js, you can use them directly.
+// For instance, if you added 'twinkle' and 'dash' to theme.extend.animation and theme.extend.keyframes in tailwind.config.js
