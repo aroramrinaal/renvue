@@ -93,7 +93,7 @@ export async function POST(request: Request) {
     try {
       const [response, githubResults] = await Promise.all([ 
         client.chat.completions.create({
-          model: "llama-3.1-sonar-large-128k-online",
+          model: "sonar",
           messages: [
             {
               role: "system",
