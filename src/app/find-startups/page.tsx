@@ -1,17 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  Header,
-  HeroSection,
-  SearchForm,
-  HowItWorks,
-  AnalysisResults,
-  Footer,
-  BackgroundDecorations,
-  ChatResponse,
-  Startup,
-} from "@/components/find-startups";
+import Header from "@/components/find-startups/Header";
+import HeroSection from "@/components/find-startups/HeroSection";
+import SearchForm from "@/components/find-startups/SearchForm";
+import HowItWorks from "@/components/find-startups/HowItWorks";
+import AnalysisResults from "@/components/find-startups/AnalysisResults";
+import Footer from "@/components/find-startups/Footer";
+import BackgroundDecorations from "@/components/find-startups/BackgroundDecorations";
+import { ChatResponse, Startup } from "@/components/find-startups/types";
 
 const Chatbot: React.FC = () => {
   const [productIdea, setProductIdea] = useState("");
