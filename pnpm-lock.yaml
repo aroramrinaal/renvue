@@ -38,9 +38,6 @@ importers:
       next:
         specifier: 16.2.4
         version: 16.2.4(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
-      next-sitemap:
-        specifier: ^4.2.3
-        version: 4.2.3(next@16.2.4(react-dom@19.2.5(react@19.2.5))(react@19.2.5))
       openai:
         specifier: ^4.77.3
         version: 4.77.3
@@ -384,9 +381,6 @@ packages:
     engines: {node: '>=16'}
     cpu: [x64]
     os: [win32]
-
-  '@corex/deepmerge@4.0.43':
-    resolution: {integrity: sha512-N8uEMrMPL0cu/bdboEWpQYb/0i2K5Qn8eCsxzOmxSggJbbQte7ljMRoXm917AbntqTGOzdTu+vP3KOOzoC70HQ==}
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -901,9 +895,6 @@ packages:
   '@netlify/plugin-nextjs@5.9.3':
     resolution: {integrity: sha512-760YvPaw6tSPmmX/2sqRzqBehPOfTD6lJoUb+bW+yZhQNyfLyCJR9/cRQP0+fFN2CCmdRWECX4nbi76Qne5/FQ==}
     engines: {node: '>=18.0.0'}
-
-  '@next/env@13.5.8':
-    resolution: {integrity: sha512-YmiG58BqyZ2FjrF2+5uZExL2BrLr8RTQzLXNDJ8pJr0O+rPlOeDPXp1p1/4OrR3avDidzZo3D8QO2cuDv1KCkw==}
 
   '@next/env@16.2.4':
     resolution: {integrity: sha512-dKkkOzOSwFYe5RX6y26fZgkSpVAlIOJKQHIiydQcrWH6y/97+RceSOAdjZ14Qa3zLduVUy0TXcn+EiM6t4rPgw==}
@@ -2101,9 +2092,6 @@ packages:
     resolution: {integrity: sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==}
     engines: {node: '>=16 || 14 >=14.17'}
 
-  minimist@1.2.8:
-    resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
-
   minipass@4.2.8:
     resolution: {integrity: sha512-fNzuVyifolSLFL4NzpF+wEF4qrgqaaKX0haXPQEdQ7NKAN+WecoKMHV09YcuL/DHxrUsYQOK3MiuDf7Ip2OXfQ==}
     engines: {node: '>=8'}
@@ -2140,13 +2128,6 @@ packages:
   negotiator@1.0.0:
     resolution: {integrity: sha512-8Ofs/AUQh8MaEcrlq5xOX0CQ9ypTF5dl78mjlMNfOK08fzpgTHQRQPBxcPlEtIw0yRpws+Zo/3r+5WRby7u3Gg==}
     engines: {node: '>= 0.6'}
-
-  next-sitemap@4.2.3:
-    resolution: {integrity: sha512-vjdCxeDuWDzldhCnyFCQipw5bfpl4HmZA7uoo3GAaYGjGgfL4Cxb1CiztPuWGmS+auYs7/8OekRS8C2cjdAsjQ==}
-    engines: {node: '>=14.18'}
-    hasBin: true
-    peerDependencies:
-      next: '*'
 
   next@16.2.4:
     resolution: {integrity: sha512-kPvz56wF5frc+FxlHI5qnklCzbq53HTwORaWBGdT0vNoKh1Aya9XC8aPauH4NJxqtzbWsS5mAbctm4cr+EkQ2Q==}
@@ -3482,8 +3463,6 @@ snapshots:
   '@cloudflare/workerd-windows-64@1.20260430.1':
     optional: true
 
-  '@corex/deepmerge@4.0.43': {}
-
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
@@ -3816,8 +3795,6 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.5.0
 
   '@netlify/plugin-nextjs@5.9.3': {}
-
-  '@next/env@13.5.8': {}
 
   '@next/env@16.2.4': {}
 
@@ -5191,8 +5168,6 @@ snapshots:
     dependencies:
       brace-expansion: 2.0.2
 
-  minimist@1.2.8: {}
-
   minipass@4.2.8: {}
 
   minipass@7.1.2: {}
@@ -5220,14 +5195,6 @@ snapshots:
   nanoid@3.3.8: {}
 
   negotiator@1.0.0: {}
-
-  next-sitemap@4.2.3(next@16.2.4(react-dom@19.2.5(react@19.2.5))(react@19.2.5)):
-    dependencies:
-      '@corex/deepmerge': 4.0.43
-      '@next/env': 13.5.8
-      fast-glob: 3.3.3
-      minimist: 1.2.8
-      next: 16.2.4(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
 
   next@16.2.4(react-dom@19.2.5(react@19.2.5))(react@19.2.5):
     dependencies:
