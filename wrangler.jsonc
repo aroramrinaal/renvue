@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "main": ".open-next/worker.js",
-  "name": "existyet",
+  "name": "renvue",
   "compatibility_date": "2026-05-02",
   "compatibility_flags": [
     "nodejs_compat"
@@ -13,13 +13,7 @@
   "services": [
     {
       "binding": "WORKER_SELF_REFERENCE",
-      "service": "existyet"
-    }
-  ],
-  "r2_buckets": [
-    {
-      "binding": "NEXT_INC_CACHE_R2_BUCKET",
-      "bucket_name": "existyet-opennext-cache"
+      "service": "renvue"
     }
   ],
   "images": {
