@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
-import OpenAI from "openai";
 import { appendToSheet } from "@/utils/googleSheets";
-import { headers } from 'next/headers';
 import { searchGitHub } from "@/utils/githubSearch";
 import { getProductHuntPosts } from "@/utils/productHunt";  // Import your scraping function
 
@@ -10,17 +8,42 @@ export const runtime = 'nodejs';
 export const maxDuration = 60;
 export const dynamic = 'force-dynamic';
 
-function getPerplexityClient() {
+async function createPerplexityCompletion(productIdea: string, productHuntPosts: any[]) {
   const apiKey = process.env.PERPLEXITY_API_KEY;
 
   if (!apiKey) {
     throw new Error("PERPLEXITY_API_KEY is not configured");
   }
 
-  return new OpenAI({
-    apiKey,
-    baseURL: "https://api.perplexity.ai",
+  const response = await fetch("https://api.perplexity.ai/v1/sonar", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: "sonar",
+      messages: [
+        {
+          role: "system",
+          content: systemPrompt,
+        },
+        {
+          role: "user",
+          content: productIdea + `Here are some recent posts from Product Hunt that could be relevant for this idea: ${JSON.stringify(productHuntPosts)}`,
+        },
+      ],
+      temperature: 0.7,
+      max_tokens: 2000,
+    }),
   });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Perplexity API request failed with ${response.status}: ${errorText}`);
+  }
+
+  return response.json();
 }
 
 const systemPrompt = `You are an investment research assistant. Analyze the provided problem or product idea and return a JSON response.
@@ -81,7 +104,6 @@ export async function POST(request: Request) {
     }
 
     console.log("Analyzing product idea:", productIdea);
-    const client = getPerplexityClient();
 
     // Fetch the product posts from Product Hunt
     let productHuntPosts: any[] = [];
@@ -97,21 +119,7 @@ export async function POST(request: Request) {
 
     try {
       const [response, githubResults] = await Promise.all([ 
-        client.chat.completions.create({
-          model: "sonar",
-          messages: [
-            {
-              role: "system",
-              content: systemPrompt,
-            },
-            {
-              role: "user",
-              content: productIdea + `Here are some recent posts from Product Hunt that could be relevant for this idea: ${JSON.stringify(productHuntPosts)}`,
-            }
-          ],
-          temperature: 0.7,
-          max_tokens: 2000,
-        }),
+        createPerplexityCompletion(productIdea, productHuntPosts),
         githubSearchPromise
       ]);
 
