@@ -20,7 +20,7 @@ The platform simplifies discovery and funding, targeting investors hungry for op
 Run the development server:
 
 ```bash
-npm run dev
+pnpm dev
 # or
 yarn dev
 ```
