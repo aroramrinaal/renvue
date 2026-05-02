@@ -10,10 +10,18 @@ export const runtime = 'nodejs';
 export const maxDuration = 60;
 export const dynamic = 'force-dynamic';
 
-const client = new OpenAI({
-  apiKey: process.env.PERPLEXITY_API_KEY,
-  baseURL: "https://api.perplexity.ai",
-});
+function getPerplexityClient() {
+  const apiKey = process.env.PERPLEXITY_API_KEY;
+
+  if (!apiKey) {
+    throw new Error("PERPLEXITY_API_KEY is not configured");
+  }
+
+  return new OpenAI({
+    apiKey,
+    baseURL: "https://api.perplexity.ai",
+  });
+}
 
 const systemPrompt = `You are an investment research assistant. Analyze the provided problem or product idea and return a JSON response.
 IMPORTANT: Your response must be ONLY valid JSON with NO markdown, NO code blocks, and NO additional text. If it contains source details in its title/name then you must have the same in your response structure startup name.
@@ -64,10 +72,6 @@ export async function POST(request: Request) {
   };
 
   try {
-    if (!process.env.PERPLEXITY_API_KEY) {
-      throw new Error("PERPLEXITY_API_KEY is not configured");
-    }
-
     const { productIdea } = await request.json();
     if (!productIdea) {
       return NextResponse.json(
@@ -77,6 +81,7 @@ export async function POST(request: Request) {
     }
 
     console.log("Analyzing product idea:", productIdea);
+    const client = getPerplexityClient();
 
     // Fetch the product posts from Product Hunt
     let productHuntPosts: any[] = [];
